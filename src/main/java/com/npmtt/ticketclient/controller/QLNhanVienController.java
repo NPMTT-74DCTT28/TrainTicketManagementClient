@@ -45,6 +45,7 @@ public class QLNhanVienController {
 
             for (NhanVienResponseDTO nhanVien : danhSachNhanVien) {
                 tableModel.addRow(new Object[]{
+                        nhanVien.getId(),
                         nhanVien.getMaNhanVien(),
                         nhanVien.getHoTen(),
                         nhanVien.getNgaySinh(),
@@ -75,12 +76,14 @@ public class QLNhanVienController {
                 }
 
                 NhanVienRequestDTO newNhanVien = panel.getNhanVienFromForm();
+                newNhanVien.setId(-1);
                 NhanVienResponseDTO ketQua = apiClient.createNhanVien(newNhanVien);
                 panel.showMessage("Thêm nhân viên " + ketQua.getHoTen() + " thành công!");
                 refresh();
             } catch (Exception ex) {
                 ex.printStackTrace();
                 panel.showError(ex.getMessage());
+                refresh();
             }
         }
     }
@@ -89,6 +92,22 @@ public class QLNhanVienController {
         @Override
         public void actionPerformed(ActionEvent e) {
             //TODO: Gọi API để sửa thông tin nhân viên
+            try {
+                if (panel.thongBaoLoiDauVao() != null) {
+                    panel.showWarning(panel.thongBaoLoiDauVao());
+                    return;
+                }
+
+                NhanVienRequestDTO edited = panel.getNhanVienFromForm();
+                edited.setId(Integer.parseInt(tableModel.getValueAt(selectedRow, 0).toString()));
+                NhanVienResponseDTO ketQua = apiClient.updateNhanVien(edited);
+                panel.showMessage("Cập nhật nhân viên " + ketQua.getHoTen() + " thành công!");
+                refresh();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                panel.showError(ex.getMessage());
+                refresh();
+            }
         }
     }
 
@@ -126,10 +145,10 @@ public class QLNhanVienController {
                 return;
             }
 
-            panel.setMaNhanVien(tableModel.getValueAt(selectedRow, 0).toString());
-            panel.setHoTen(tableModel.getValueAt(selectedRow, 1).toString());
+            panel.setMaNhanVien(tableModel.getValueAt(selectedRow, 1).toString());
+            panel.setHoTen(tableModel.getValueAt(selectedRow, 2).toString());
 
-            String ngaySinh = tableModel.getValueAt(selectedRow, 2).toString();
+            String ngaySinh = tableModel.getValueAt(selectedRow, 3).toString();
 
             try {
                 panel.setNgaySinh(LocalDate.parse(ngaySinh));
@@ -138,17 +157,17 @@ public class QLNhanVienController {
                 panel.showError("Lỗi khi chuyển đổi ngày tháng: " + ex.getMessage());
             }
 
-            panel.setGioiTinh(tableModel.getValueAt(selectedRow, 3).toString());
+            panel.setGioiTinh(tableModel.getValueAt(selectedRow, 4).toString());
 
-            panel.setSdt(tableModel.getValueAt(selectedRow, 4).toString());
+            panel.setSdt(tableModel.getValueAt(selectedRow, 5).toString());
 
-            Object emailObj = tableModel.getValueAt(selectedRow, 5);
+            Object emailObj = tableModel.getValueAt(selectedRow, 6);
             panel.setEmail(emailObj != null ? emailObj.toString() : "");
 
-            Object diaChiObj = tableModel.getValueAt(selectedRow, 6);
+            Object diaChiObj = tableModel.getValueAt(selectedRow, 7);
             panel.setDiaChi(diaChiObj != null ? diaChiObj.toString() : "");
 
-            panel.setVaiTro(tableModel.getValueAt(selectedRow, 7).toString());
+            panel.setVaiTro(tableModel.getValueAt(selectedRow, 8).toString());
         }
 
         @Override

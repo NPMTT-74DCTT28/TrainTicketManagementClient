@@ -8,6 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class NhanVienRequestDTO {
+    private int id;
     private String maNhanVien;
     private String matKhau;
     private String hoTen;
@@ -27,5 +28,10 @@ public class NhanVienRequestDTO {
         this.email = email;
         this.diaChi = diaChi;
         this.vaiTro = vaiTro;
+    }
+
+    public NhanVienRequestDTO(String maNhanVien, String matKhau, String hoTen, String ngaySinh, String gioiTinh, String sdt, String email, String diaChi, String vaiTro) {
+        this.matKhau = matKhau;
+        this(maNhanVien, hoTen, ngaySinh, gioiTinh, sdt, email, diaChi, vaiTro);
     }
 }

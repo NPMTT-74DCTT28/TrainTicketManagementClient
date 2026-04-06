@@ -69,4 +69,27 @@ public class NhanVienApiClient {
             throw new Exception(errorResponse.getMessage());
         }
     }
+
+    public NhanVienResponseDTO updateNhanVien(NhanVienRequestDTO requestDTO) throws Exception {
+        String jsonBody = gson.toJson(requestDTO);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(API_URL))
+                .header("Content-Type", "application/json")
+                .PUT(HttpRequest.BodyPublishers.ofString(jsonBody))
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        if (response.statusCode() == 200) {
+            Type responseType = new TypeToken<ApiResponse<NhanVienResponseDTO>>() {
+            }.getType();
+            ApiResponse<NhanVienResponseDTO> apiResponse = gson.fromJson(response.body(), responseType);
+            return apiResponse.getData();
+        } else {
+            Type responseType = new TypeToken<ApiResponse<NhanVienResponseDTO>>() {
+            }.getType();
+            ApiResponse<Void> errorResponse = gson.fromJson(response.body(), responseType);
+            throw new Exception(errorResponse.getMessage());
+        }
+    }
 }

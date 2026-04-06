@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class NhanVienResponseDTO {
+    private int id;
     private String maNhanVien;
     private String hoTen;
     private String ngaySinh;
