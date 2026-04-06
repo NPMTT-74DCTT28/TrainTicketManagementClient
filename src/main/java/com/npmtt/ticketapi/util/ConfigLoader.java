@@ -2,9 +2,8 @@ package com.npmtt.ticketapi.util;
 
 import lombok.RequiredArgsConstructor;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 @RequiredArgsConstructor
@@ -14,9 +13,8 @@ public class ConfigLoader {
 
     static {
         try {
-            File configFile = new File(fileName);
-            FileInputStream fis = new FileInputStream(configFile);
-            properties.load(fis);
+            InputStream is = ConfigLoader.class.getClassLoader().getResourceAsStream(fileName);
+            properties.load(is);
         } catch (IOException e) {
             throw new RuntimeException("Không tìm thấy file cấu hình " + fileName, e);
         }
