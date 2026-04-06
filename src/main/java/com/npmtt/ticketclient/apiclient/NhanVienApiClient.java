@@ -92,4 +92,20 @@ public class NhanVienApiClient {
             throw new Exception(errorResponse.getMessage());
         }
     }
+
+    public void deleteNhanVien(int id) throws Exception {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(API_URL + "/" + id))
+                .DELETE()
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+        if (response.statusCode() != 200) {
+            Type responseType = new TypeToken<ApiResponse<NhanVienResponseDTO>>() {
+            }.getType();
+            ApiResponse<Void> errorResponse = gson.fromJson(response.body(), responseType);
+            throw new Exception(errorResponse.getMessage());
+        }
+    }
 }

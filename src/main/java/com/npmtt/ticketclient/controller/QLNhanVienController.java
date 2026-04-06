@@ -68,7 +68,6 @@ public class QLNhanVienController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            //TODO: Gọi API để thêm thông tin nhân viên
             try {
                 if (panel.thongBaoLoiDauVao() != null) {
                     panel.showWarning(panel.thongBaoLoiDauVao());
@@ -91,7 +90,6 @@ public class QLNhanVienController {
     private class SuaNhanVienListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            //TODO: Gọi API để sửa thông tin nhân viên
             try {
                 if (panel.thongBaoLoiDauVao() != null) {
                     panel.showWarning(panel.thongBaoLoiDauVao());
@@ -99,6 +97,7 @@ public class QLNhanVienController {
                 }
 
                 NhanVienRequestDTO edited = panel.getNhanVienFromForm();
+                if (!panel.showConfirm("Bạn muốn cập nhật thông tin nhân viên " + edited.getHoTen() + "?")) return;
                 edited.setId(Integer.parseInt(tableModel.getValueAt(selectedRow, 0).toString()));
                 NhanVienResponseDTO ketQua = apiClient.updateNhanVien(edited);
                 panel.showMessage("Cập nhật nhân viên " + ketQua.getHoTen() + " thành công!");
@@ -114,7 +113,17 @@ public class QLNhanVienController {
     private class XoaNhanVienListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            //TODO: Gọi API để xoá thông tin nhân viên
+            try {
+                if (!panel.showConfirm("Bạn chắc chắn muốn xoá?")) return;
+                int id = Integer.parseInt(tableModel.getValueAt(selectedRow, 0).toString());
+                apiClient.deleteNhanVien(id);
+                panel.showMessage("Xoá nhân viên thành công!");
+                refresh();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                panel.showError(ex.getMessage());
+                refresh();
+            }
         }
     }
 
