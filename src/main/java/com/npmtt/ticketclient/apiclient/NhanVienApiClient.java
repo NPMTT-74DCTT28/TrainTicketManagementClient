@@ -7,6 +7,7 @@ import com.npmtt.ticketclient.dto.response.ApiResponse;
 import com.npmtt.ticketclient.dto.response.NhanVienResponseDTO;
 import com.npmtt.ticketclient.util.ConfigLoader;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 import java.lang.reflect.Type;
 import java.net.URI;
@@ -17,17 +18,12 @@ import java.util.List;
 
 @AllArgsConstructor
 public class NhanVienApiClient {
-    private static NhanVienApiClient instance;
+    @Getter
+    private static final NhanVienApiClient instance = new NhanVienApiClient();
+
     private static final String API_URL = ConfigLoader.getBaseApiUrl() + "/nhan-vien";
     private final HttpClient httpClient = HttpClient.newHttpClient();
     private final Gson gson = new Gson();
-
-    public static NhanVienApiClient getInstance() {
-        if (instance == null) {
-            return new NhanVienApiClient();
-        }
-        return instance;
-    }
 
     public List<NhanVienResponseDTO> getAllNhanVien() throws Exception {
         HttpRequest request = HttpRequest.newBuilder()

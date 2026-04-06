@@ -23,17 +23,4 @@ public class SessionManager {
         }
         return false;
     }
-
-    public static boolean hasAnyRole(String... roles) {
-        if (currentUser == null || currentUser.getVaiTro() == null) {
-            return false;
-        }
-
-        for (String role : roles) {
-            if (role.equalsIgnoreCase(currentUser.getVaiTro())) {
-                return true;
-            }
-        }
-        return false;
-    }
 }

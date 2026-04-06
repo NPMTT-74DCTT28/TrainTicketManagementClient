@@ -268,6 +268,7 @@ public class MainController {
             if (mainFrame.showConfirm("Bạn chắc chắn muốn đăng xuất?")) {
                 mainFrame.dispose();
                 SessionManager.clearSession();
+                new DangNhapController();
             }
         }
     }
@@ -284,9 +285,5 @@ public class MainController {
         public void windowClosing(WindowEvent e) {
             exit();
         }
-    }
-
-    static void main(String[] args) {
-        new MainController(new MainFrame());
     }
 }
