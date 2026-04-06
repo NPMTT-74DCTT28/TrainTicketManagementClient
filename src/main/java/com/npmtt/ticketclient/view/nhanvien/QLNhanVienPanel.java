@@ -15,8 +15,6 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
@@ -110,7 +108,7 @@ public final class QLNhanVienPanel extends BasePanel {
         panelTop.add(panelForm);
         panelTop.add(createButtonField(buttons, Color.white), BorderLayout.SOUTH);
 
-        Object[] columns = new Object[]{"ID", "Mã nhân viên", "Họ tên", "Ngày sinh", "Giới tính", "SĐT", "Email", "Địa chỉ", "Vai trò"};
+        Object[] columns = new Object[]{"Mã nhân viên", "Họ tên", "Ngày sinh", "Giới tính", "SĐT", "Email", "Địa chỉ", "Vai trò"};
         DefaultTableModel tableModel = new DefaultTableModel(columns, 0);
 
         table = new JTable(tableModel) {
@@ -119,9 +117,6 @@ public final class QLNhanVienPanel extends BasePanel {
                 return false;
             }
         };
-        TableColumnModel columnModel = table.getColumnModel();
-        TableColumn columnId = columnModel.getColumn(0);
-        table.removeColumn(columnId);
 
         JTableHeader tableHeader = table.getTableHeader();
         tableHeader.setBackground(SECONDARY_COLOR);
