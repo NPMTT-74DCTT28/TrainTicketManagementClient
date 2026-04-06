@@ -3,7 +3,7 @@ package com.npmtt.ticketclient.dto.response;
 import lombok.Data;
 
 @Data
-public class NhanVienResponseDTO {
+public class NhanVienResponse {
     private int id;
     private String maNhanVien;
     private String hoTen;

@@ -7,7 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class NhanVienRequestDTO {
+public class NhanVienRequest {
     private int id;
     private String maNhanVien;
     private String matKhau;
@@ -19,7 +19,7 @@ public class NhanVienRequestDTO {
     private String diaChi;
     private String vaiTro;
 
-    public NhanVienRequestDTO(String maNhanVien, String hoTen, String ngaySinh, String gioiTinh, String sdt, String email, String diaChi, String vaiTro) {
+    public NhanVienRequest(String maNhanVien, String hoTen, String ngaySinh, String gioiTinh, String sdt, String email, String diaChi, String vaiTro) {
         this.maNhanVien = maNhanVien;
         this.hoTen = hoTen;
         this.ngaySinh = ngaySinh;
@@ -30,7 +30,7 @@ public class NhanVienRequestDTO {
         this.vaiTro = vaiTro;
     }
 
-    public NhanVienRequestDTO(String maNhanVien, String matKhau, String hoTen, String ngaySinh, String gioiTinh, String sdt, String email, String diaChi, String vaiTro) {
+    public NhanVienRequest(String maNhanVien, String matKhau, String hoTen, String ngaySinh, String gioiTinh, String sdt, String email, String diaChi, String vaiTro) {
         this.matKhau = matKhau;
         this(maNhanVien, hoTen, ngaySinh, gioiTinh, sdt, email, diaChi, vaiTro);
     }

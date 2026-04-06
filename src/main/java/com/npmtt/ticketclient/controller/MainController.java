@@ -258,7 +258,8 @@ public class MainController {
     private class DoiMatKhauListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            mainFrame.setVisible(false);
+            new DoiMatKhauController(mainFrame);
         }
     }
 

@@ -2,7 +2,7 @@ package com.npmtt.ticketclient.controller;
 
 import com.npmtt.ticketclient.apiclient.AuthApiClient;
 import com.npmtt.ticketclient.dto.request.LoginRequest;
-import com.npmtt.ticketclient.dto.response.NhanVienResponseDTO;
+import com.npmtt.ticketclient.dto.response.NhanVienResponse;
 import com.npmtt.ticketclient.util.SessionManager;
 import com.npmtt.ticketclient.view.core.DangNhapFrame;
 import com.npmtt.ticketclient.view.core.MainFrame;
@@ -57,7 +57,7 @@ public class DangNhapController {
                         .maNhanVien(maNhanVien)
                         .matKhau(matKhau)
                         .build();
-                NhanVienResponseDTO user = apiClient.login(request);
+                NhanVienResponse user = apiClient.login(request);
                 SessionManager.startSession(user);
                 frame.dispose();
                 new MainController(new MainFrame());

@@ -1,8 +1,8 @@
 package com.npmtt.ticketclient.controller;
 
 import com.npmtt.ticketclient.apiclient.NhanVienApiClient;
-import com.npmtt.ticketclient.dto.request.NhanVienRequestDTO;
-import com.npmtt.ticketclient.dto.response.NhanVienResponseDTO;
+import com.npmtt.ticketclient.dto.request.NhanVienRequest;
+import com.npmtt.ticketclient.dto.response.NhanVienResponse;
 import com.npmtt.ticketclient.view.nhanvien.QLNhanVienPanel;
 
 import javax.swing.table.DefaultTableModel;
@@ -40,10 +40,10 @@ public class QLNhanVienController {
 
     private void refresh() {
         try {
-            List<NhanVienResponseDTO> danhSachNhanVien = apiClient.getAllNhanVien();
+            List<NhanVienResponse> danhSachNhanVien = apiClient.getAllNhanVien();
             tableModel.setRowCount(0);
 
-            for (NhanVienResponseDTO nhanVien : danhSachNhanVien) {
+            for (NhanVienResponse nhanVien : danhSachNhanVien) {
                 tableModel.addRow(new Object[]{
                         nhanVien.getId(),
                         nhanVien.getMaNhanVien(),
@@ -74,9 +74,9 @@ public class QLNhanVienController {
                     return;
                 }
 
-                NhanVienRequestDTO newNhanVien = panel.getNhanVienFromForm();
+                NhanVienRequest newNhanVien = panel.getNhanVienFromForm();
                 newNhanVien.setId(-1);
-                NhanVienResponseDTO ketQua = apiClient.createNhanVien(newNhanVien);
+                NhanVienResponse ketQua = apiClient.createNhanVien(newNhanVien);
                 panel.showMessage("Thêm nhân viên " + ketQua.getHoTen() + " thành công!");
                 refresh();
             } catch (Exception ex) {
@@ -96,10 +96,10 @@ public class QLNhanVienController {
                     return;
                 }
 
-                NhanVienRequestDTO edited = panel.getNhanVienFromForm();
+                NhanVienRequest edited = panel.getNhanVienFromForm();
                 if (!panel.showConfirm("Bạn muốn cập nhật thông tin nhân viên " + edited.getHoTen() + "?")) return;
                 edited.setId(Integer.parseInt(tableModel.getValueAt(selectedRow, 0).toString()));
-                NhanVienResponseDTO ketQua = apiClient.updateNhanVien(edited);
+                NhanVienResponse ketQua = apiClient.updateNhanVien(edited);
                 panel.showMessage("Cập nhật nhân viên " + ketQua.getHoTen() + " thành công!");
                 refresh();
             } catch (Exception ex) {

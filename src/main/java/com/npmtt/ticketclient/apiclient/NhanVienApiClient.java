@@ -2,9 +2,9 @@ package com.npmtt.ticketclient.apiclient;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.npmtt.ticketclient.dto.request.NhanVienRequestDTO;
+import com.npmtt.ticketclient.dto.request.NhanVienRequest;
 import com.npmtt.ticketclient.dto.response.ApiResponse;
-import com.npmtt.ticketclient.dto.response.NhanVienResponseDTO;
+import com.npmtt.ticketclient.dto.response.NhanVienResponse;
 import com.npmtt.ticketclient.util.ConfigLoader;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,7 +25,7 @@ public class NhanVienApiClient {
     private final HttpClient httpClient = HttpClient.newHttpClient();
     private final Gson gson = new Gson();
 
-    public List<NhanVienResponseDTO> getAllNhanVien() throws Exception {
+    public List<NhanVienResponse> getAllNhanVien() throws Exception {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(API_URL))
                 .GET()
@@ -33,9 +33,9 @@ public class NhanVienApiClient {
 
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         if (response.statusCode() == 200) {
-            Type responseType = new TypeToken<ApiResponse<List<NhanVienResponseDTO>>>() {
+            Type responseType = new TypeToken<ApiResponse<List<NhanVienResponse>>>() {
             }.getType();
-            ApiResponse<List<NhanVienResponseDTO>> apiResponse = gson.fromJson(response.body(), responseType);
+            ApiResponse<List<NhanVienResponse>> apiResponse = gson.fromJson(response.body(), responseType);
 
             return apiResponse.getData();
         } else {
@@ -43,7 +43,7 @@ public class NhanVienApiClient {
         }
     }
 
-    public NhanVienResponseDTO createNhanVien(NhanVienRequestDTO requestDTO) throws Exception {
+    public NhanVienResponse createNhanVien(NhanVienRequest requestDTO) throws Exception {
         String jsonBody = gson.toJson(requestDTO);
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -54,19 +54,19 @@ public class NhanVienApiClient {
 
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         if (response.statusCode() == 201) {
-            Type responseType = new TypeToken<ApiResponse<NhanVienResponseDTO>>() {
+            Type responseType = new TypeToken<ApiResponse<NhanVienResponse>>() {
             }.getType();
-            ApiResponse<NhanVienResponseDTO> apiResponse = gson.fromJson(response.body(), responseType);
+            ApiResponse<NhanVienResponse> apiResponse = gson.fromJson(response.body(), responseType);
             return apiResponse.getData();
         } else {
-            Type responseType = new TypeToken<ApiResponse<NhanVienResponseDTO>>() {
+            Type responseType = new TypeToken<ApiResponse<NhanVienResponse>>() {
             }.getType();
             ApiResponse<Void> errorResponse = gson.fromJson(response.body(), responseType);
             throw new Exception(errorResponse.getMessage());
         }
     }
 
-    public NhanVienResponseDTO updateNhanVien(NhanVienRequestDTO requestDTO) throws Exception {
+    public NhanVienResponse updateNhanVien(NhanVienRequest requestDTO) throws Exception {
         String jsonBody = gson.toJson(requestDTO);
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -77,12 +77,12 @@ public class NhanVienApiClient {
 
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         if (response.statusCode() == 200) {
-            Type responseType = new TypeToken<ApiResponse<NhanVienResponseDTO>>() {
+            Type responseType = new TypeToken<ApiResponse<NhanVienResponse>>() {
             }.getType();
-            ApiResponse<NhanVienResponseDTO> apiResponse = gson.fromJson(response.body(), responseType);
+            ApiResponse<NhanVienResponse> apiResponse = gson.fromJson(response.body(), responseType);
             return apiResponse.getData();
         } else {
-            Type responseType = new TypeToken<ApiResponse<NhanVienResponseDTO>>() {
+            Type responseType = new TypeToken<ApiResponse<NhanVienResponse>>() {
             }.getType();
             ApiResponse<Void> errorResponse = gson.fromJson(response.body(), responseType);
             throw new Exception(errorResponse.getMessage());
@@ -98,7 +98,7 @@ public class NhanVienApiClient {
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
         if (response.statusCode() != 200) {
-            Type responseType = new TypeToken<ApiResponse<NhanVienResponseDTO>>() {
+            Type responseType = new TypeToken<ApiResponse<NhanVienResponse>>() {
             }.getType();
             ApiResponse<Void> errorResponse = gson.fromJson(response.body(), responseType);
             throw new Exception(errorResponse.getMessage());

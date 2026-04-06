@@ -1,15 +1,15 @@
 package com.npmtt.ticketclient.util;
 
-import com.npmtt.ticketclient.dto.response.NhanVienResponseDTO;
+import com.npmtt.ticketclient.dto.response.NhanVienResponse;
 import com.npmtt.ticketclient.enums.VaiTro;
 import lombok.Getter;
 
 public class SessionManager {
 
     @Getter
-    private static NhanVienResponseDTO currentUser;
+    private static NhanVienResponse currentUser;
 
-    public static void startSession(NhanVienResponseDTO nhanVien) {
+    public static void startSession(NhanVienResponse nhanVien) {
         currentUser = nhanVien;
     }
 

@@ -1,7 +1,7 @@
 package com.npmtt.ticketclient.view.nhanvien;
 
 
-import com.npmtt.ticketclient.dto.request.NhanVienRequestDTO;
+import com.npmtt.ticketclient.dto.request.NhanVienRequest;
 import com.npmtt.ticketclient.enums.GioiTinh;
 import com.npmtt.ticketclient.enums.VaiTro;
 import com.npmtt.ticketclient.util.DinhDang;
@@ -334,7 +334,7 @@ public final class QLNhanVienPanel extends BasePanel {
         return null;
     }
 
-    public NhanVienRequestDTO getNhanVienFromForm() {
+    public NhanVienRequest getNhanVienFromForm() {
         String maNhanVien = getMaNhanVien();
         String matKhau = getMatKhau();
         String hoTen = getHoTen();
@@ -346,9 +346,9 @@ public final class QLNhanVienPanel extends BasePanel {
         String vaiTro = getVaiTro();
 
         if (isEditMode) {
-            return new NhanVienRequestDTO(maNhanVien, hoTen, ngaySinh, gioiTinh, sdt, email, diaChi, vaiTro);
+            return new NhanVienRequest(maNhanVien, hoTen, ngaySinh, gioiTinh, sdt, email, diaChi, vaiTro);
         } else {
-            return new NhanVienRequestDTO(maNhanVien, matKhau, hoTen, ngaySinh, gioiTinh, sdt, email, diaChi, vaiTro);
+            return new NhanVienRequest(maNhanVien, matKhau, hoTen, ngaySinh, gioiTinh, sdt, email, diaChi, vaiTro);
         }
     }
 
