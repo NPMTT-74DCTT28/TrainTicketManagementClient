@@ -173,9 +173,9 @@ public final class QLNhanVienPanel extends BasePanel {
         fieldHoTen.setText(hoTen != null ? hoTen : "");
     }
 
-    public String getNgaySinh() {
+    public LocalDate getNgaySinh() {
         if (chooserNgaySinh.getDate() != null) {
-            return chooserNgaySinh.getDate().toString();
+            return chooserNgaySinh.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         }
         return null;
     }
@@ -286,11 +286,11 @@ public final class QLNhanVienPanel extends BasePanel {
             chooserNgaySinh.requestFocus();
             return "Vui lòng chọn ngày sinh.";
         }
-        if (ChronoUnit.YEARS.between(LocalDate.parse(getNgaySinh()), LocalDate.now()) < 18) {
+        if (ChronoUnit.YEARS.between(getNgaySinh(), LocalDate.now()) < 18) {
             chooserNgaySinh.requestFocus();
             return "Nhân viên phải từ đủ 18 tuổi trở lên.";
         }
-        if (ChronoUnit.YEARS.between(LocalDate.parse(getNgaySinh()), LocalDate.now()) > 65) {
+        if (ChronoUnit.YEARS.between(getNgaySinh(), LocalDate.now()) > 65) {
             chooserNgaySinh.requestFocus();
             return "Nhân viên đã quá tuổi lao động.";
         }
@@ -335,7 +335,7 @@ public final class QLNhanVienPanel extends BasePanel {
         String maNhanVien = getMaNhanVien();
         String matKhau = getMatKhau();
         String hoTen = getHoTen();
-        String ngaySinh = getNgaySinh();
+        String ngaySinh = String.valueOf(getNgaySinh());
         String gioiTinh = getGioiTinh();
         String sdt = getSdt();
         String email = getEmail();

@@ -1,8 +1,8 @@
 package com.npmtt.ticketclient.controller;
 
 import com.npmtt.ticketclient.apiclient.NhanVienApiClient;
+import com.npmtt.ticketclient.dto.request.NhanVienRequestDTO;
 import com.npmtt.ticketclient.dto.response.NhanVienResponseDTO;
-import com.npmtt.ticketclient.util.DinhDang;
 import com.npmtt.ticketclient.view.nhanvien.QLNhanVienPanel;
 
 import javax.swing.table.DefaultTableModel;
@@ -10,18 +10,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
 public class QLNhanVienController {
-
     private final QLNhanVienPanel panel;
+    private final NhanVienApiClient apiClient;
     private final DefaultTableModel tableModel;
     private int selectedRow;
 
     public QLNhanVienController(QLNhanVienPanel panel) {
         this.panel = panel;
+        this.apiClient = NhanVienApiClient.getInstance();
         panel.addThemNhanVienListener(new ThemNhanVienListener());
         panel.addSuaNhanVienListener(new SuaNhanVienListener());
         panel.addXoaNhanVienListener(new XoaNhanVienListener());
@@ -40,7 +40,6 @@ public class QLNhanVienController {
 
     private void refresh() {
         try {
-            NhanVienApiClient apiClient = new NhanVienApiClient();
             List<NhanVienResponseDTO> danhSachNhanVien = apiClient.getAllNhanVien();
             tableModel.setRowCount(0);
 
@@ -58,12 +57,9 @@ public class QLNhanVienController {
             }
 
             tableModel.fireTableDataChanged();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            panel.showError("Có lỗi xảy ra khi tải dữ liệu nhân viên: " + e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
-            panel.showError("Lỗi không xác định: " + e.getMessage());
+            panel.showError(e.getMessage());
         }
     }
 
@@ -72,6 +68,20 @@ public class QLNhanVienController {
         @Override
         public void actionPerformed(ActionEvent e) {
             //TODO: Gọi API để thêm thông tin nhân viên
+            try {
+                if (panel.thongBaoLoiDauVao() != null) {
+                    panel.showWarning(panel.thongBaoLoiDauVao());
+                    return;
+                }
+
+                NhanVienRequestDTO newNhanVien = panel.getNhanVienFromForm();
+                NhanVienResponseDTO ketQua = apiClient.createNhanVien(newNhanVien);
+                panel.showMessage("Thêm nhân viên " + ketQua.getHoTen() + " thành công!");
+                refresh();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                panel.showError(ex.getMessage());
+            }
         }
     }
 
