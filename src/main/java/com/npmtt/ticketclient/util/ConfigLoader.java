@@ -1,4 +1,4 @@
-package com.npmtt.ticketapi.util;
+package com.npmtt.ticketclient.util;
 
 import lombok.RequiredArgsConstructor;
 

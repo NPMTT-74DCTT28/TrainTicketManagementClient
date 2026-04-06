@@ -1,10 +1,10 @@
-package com.npmtt.ticketapi.apiclient;
+package com.npmtt.ticketclient.apiclient;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.npmtt.ticketapi.dto.response.ApiResponse;
-import com.npmtt.ticketapi.dto.response.NhanVienResponseDTO;
-import com.npmtt.ticketapi.util.ConfigLoader;
+import com.npmtt.ticketclient.dto.response.ApiResponse;
+import com.npmtt.ticketclient.dto.response.NhanVienResponseDTO;
+import com.npmtt.ticketclient.util.ConfigLoader;
 import lombok.AllArgsConstructor;
 
 import java.lang.reflect.Type;

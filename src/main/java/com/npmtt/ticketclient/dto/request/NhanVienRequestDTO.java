@@ -1,4 +1,4 @@
-package com.npmtt.ticketapi.dto.request;
+package com.npmtt.ticketclient.dto.request;
 
 import lombok.Builder;
 import lombok.Data;
