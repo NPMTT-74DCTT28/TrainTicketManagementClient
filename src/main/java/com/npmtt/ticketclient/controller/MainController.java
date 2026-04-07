@@ -30,13 +30,19 @@ public class MainController {
         mainFrame.addLichTrinhListener(new QLLichTrinhListener(), new TKLichTrinhListener());
         mainFrame.addKhachHangListener(new QLKhachHangListener(), new TKKhachHangListener());
         mainFrame.addVeTauListener(new QLVeTauListener(), new TKVeTauListener());
-        if (SessionManager.getCurrentUser() != null) {
-            mainFrame.setXinChao(SessionManager.getCurrentUser().getHoTen());
-            String vaiTroString = SessionManager.getCurrentUser().getVaiTro();
-            VaiTro vaiTro = VaiTro.fromLabel(vaiTroString);
-            mainFrame.hienMenuTheoQuyen(vaiTro);
-            showTrangChu();
+
+        if (SessionManager.getCurrentUser() == null) {
+            mainFrame.showWarning("Bạn chưa đăng nhập, vui lòng đăng nhập để sử dụng.");
+            mainFrame.dispose();
+            new DangNhapController();
+            return;
         }
+        mainFrame.setXinChao(SessionManager.getCurrentUser().getHoTen());
+        String vaiTroString = SessionManager.getCurrentUser().getVaiTro();
+        VaiTro vaiTro = VaiTro.fromLabel(vaiTroString);
+        mainFrame.hienMenuTheoQuyen(vaiTro);
+        showTrangChu();
+
         mainFrame.addThongKeDoanhThuNgayListener(new ThongKeDoanhThuNgayListener());
         mainFrame.addThongKeDoanhThuTuyenListener(new ThongKeDoanhThuTuyenListener());
         mainFrame.addThongKeTyLeLapDayListener(new ThongKeTyLeLapDayListener());
@@ -251,14 +257,13 @@ public class MainController {
     private class ThongTinCaNhanListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            new ThongTinCaNhanController(mainFrame);
         }
     }
 
     private class DoiMatKhauListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            mainFrame.setVisible(false);
             new DoiMatKhauController(mainFrame);
         }
     }
