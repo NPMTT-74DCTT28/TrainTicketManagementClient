@@ -29,20 +29,20 @@ public class DoiMatKhauController {
     private class XacNhanListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (dialog.thongBaoLoiDauVao() != null) {
-                parent.showWarning(dialog.thongBaoLoiDauVao());
-                return;
-            }
-
-            int id = SessionManager.getCurrentUser().getId();
-            String oldPassword = dialog.getMatKhauCu();
-            String newPassword = dialog.getMatKhauMoi();
-            ChangePasswordRequest request = ChangePasswordRequest.builder()
-                    .id(id)
-                    .oldPassword(oldPassword)
-                    .newPassword(newPassword)
-                    .build();
             try {
+                if (dialog.thongBaoLoiDauVao() != null) {
+                    parent.showWarning(dialog.thongBaoLoiDauVao());
+                    return;
+                }
+
+                int id = SessionManager.getCurrentUser().getId();
+                String oldPassword = dialog.getMatKhauCu();
+                String newPassword = dialog.getMatKhauMoi();
+                ChangePasswordRequest request = ChangePasswordRequest.builder()
+                        .id(id)
+                        .oldPassword(oldPassword)
+                        .newPassword(newPassword)
+                        .build();
                 authApiClient.changePassword(request);
                 parent.showMessage("Đổi mật khẩu thành công, vui lòng đăng nhập lại!");
                 SessionManager.clearSession();
