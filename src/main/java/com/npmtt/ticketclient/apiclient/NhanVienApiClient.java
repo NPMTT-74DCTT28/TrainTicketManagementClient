@@ -11,9 +11,11 @@ import lombok.Getter;
 
 import java.lang.reflect.Type;
 import java.net.URI;
+import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @AllArgsConstructor
@@ -101,6 +103,38 @@ public class NhanVienApiClient {
             Type responseType = new TypeToken<ApiResponse<NhanVienResponse>>() {
             }.getType();
             ApiResponse<Void> errorResponse = gson.fromJson(response.body(), responseType);
+            throw new Exception(errorResponse.getMessage());
+        }
+    }
+
+    public List<NhanVienResponse> searchNhanVien(String keyword, String gioiTinh, String vaiTro) throws Exception {
+        StringBuilder urlBuilder = new StringBuilder(API_URL + "/search?");
+
+        if (keyword != null && !keyword.isEmpty()) {
+            urlBuilder.append("keyword=").append(URLEncoder.encode(keyword, StandardCharsets.UTF_8)).append("&");
+        }
+        if (gioiTinh != null && !gioiTinh.isEmpty() && !gioiTinh.equals("Tất cả")) {
+            urlBuilder.append("gioiTinh=").append(URLEncoder.encode(gioiTinh, StandardCharsets.UTF_8)).append("&");
+        }
+        if (vaiTro != null && !vaiTro.isEmpty() && !vaiTro.equals("Tất cả")) {
+            urlBuilder.append("vaiTro=").append(URLEncoder.encode(vaiTro, StandardCharsets.UTF_8));
+        }
+
+        HttpRequest httpRequest = HttpRequest.newBuilder()
+                .uri(URI.create(urlBuilder.toString()))
+                .GET()
+                .build();
+
+        HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+        if (httpResponse.statusCode() == 200) {
+            Type responseType = new TypeToken<ApiResponse<List<NhanVienResponse>>>() {
+            }.getType();
+            ApiResponse<List<NhanVienResponse>> apiResponse = gson.fromJson(httpResponse.body(), responseType);
+            return apiResponse.getData();
+        } else {
+            Type responseType = new TypeToken<ApiResponse<List<NhanVienResponse>>>() {
+            }.getType();
+            ApiResponse<Void> errorResponse = gson.fromJson(httpResponse.body(), responseType);
             throw new Exception(errorResponse.getMessage());
         }
     }

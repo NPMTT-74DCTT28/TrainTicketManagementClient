@@ -44,15 +44,15 @@ public class DangNhapController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String maNhanVien = frame.getMaNV();
-            String matKhau = frame.getMatKhau();
-
-            if (maNhanVien.isEmpty() || matKhau.isEmpty()) {
-                frame.showWarning("Vui lòng nhập đủ mã nhân viên và mật khẩu!");
-                return;
-            }
-
             try {
+                String maNhanVien = frame.getMaNV();
+                String matKhau = frame.getMatKhau();
+
+                if (maNhanVien.isEmpty() || matKhau.isEmpty()) {
+                    frame.showWarning("Vui lòng nhập đủ mã nhân viên và mật khẩu!");
+                    return;
+                }
+
                 LoginRequest request = LoginRequest.builder()
                         .maNhanVien(maNhanVien)
                         .matKhau(matKhau)

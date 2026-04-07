@@ -90,6 +90,7 @@ public class MainController {
         public void actionPerformed(ActionEvent e) {
             TKNhanVienPanel panel = new TKNhanVienPanel();
             mainFrame.showPanel(panel);
+            new TKNhanVienController(panel);
         }
     }
 
