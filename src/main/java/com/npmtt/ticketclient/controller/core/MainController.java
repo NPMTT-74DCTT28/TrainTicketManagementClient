@@ -1,5 +1,7 @@
-package com.npmtt.ticketclient.controller;
+package com.npmtt.ticketclient.controller.core;
 
+import com.npmtt.ticketclient.controller.nhanvien.QLNhanVienController;
+import com.npmtt.ticketclient.controller.nhanvien.TKNhanVienController;
 import com.npmtt.ticketclient.enums.VaiTro;
 import com.npmtt.ticketclient.util.SessionManager;
 import com.npmtt.ticketclient.view.core.Dashboard;

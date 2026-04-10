@@ -1,4 +1,4 @@
-package com.npmtt.ticketclient.controller;
+package com.npmtt.ticketclient.controller.nhanvien;
 
 import com.npmtt.ticketclient.apiclient.NhanVienApiClient;
 import com.npmtt.ticketclient.dto.response.NhanVienResponse;
