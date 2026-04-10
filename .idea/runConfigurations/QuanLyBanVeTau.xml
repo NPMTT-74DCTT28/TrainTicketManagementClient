@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="QuanLyBanVeTau" type="Application" factoryName="Application">
-    <option name="MAIN_CLASS_NAME" value="com.npmtt.ticketclient.controller.DangNhapController" />
+    <option name="MAIN_CLASS_NAME" value="com.npmtt.ticketclient.controller.core.DangNhapController" />
     <module name="ticket-client" />
     <method v="2">
       <option name="Make" enabled="true" />
