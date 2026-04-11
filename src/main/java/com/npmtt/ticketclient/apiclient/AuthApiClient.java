@@ -7,8 +7,8 @@ import com.npmtt.ticketclient.dto.request.LoginRequest;
 import com.npmtt.ticketclient.dto.response.ApiResponse;
 import com.npmtt.ticketclient.dto.response.NhanVienResponse;
 import com.npmtt.ticketclient.util.ConfigLoader;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 import java.lang.reflect.Type;
 import java.net.URI;
@@ -16,7 +16,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class AuthApiClient {
     @Getter
     private static final AuthApiClient instance = new AuthApiClient();

@@ -6,8 +6,8 @@ import com.npmtt.ticketclient.dto.request.NhanVienRequest;
 import com.npmtt.ticketclient.dto.response.ApiResponse;
 import com.npmtt.ticketclient.dto.response.NhanVienResponse;
 import com.npmtt.ticketclient.util.ConfigLoader;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 import java.lang.reflect.Type;
 import java.net.URI;
@@ -18,7 +18,7 @@ import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class NhanVienApiClient {
     @Getter
     private static final NhanVienApiClient instance = new NhanVienApiClient();
@@ -38,14 +38,18 @@ public class NhanVienApiClient {
             Type responseType = new TypeToken<ApiResponse<List<NhanVienResponse>>>() {
             }.getType();
             ApiResponse<List<NhanVienResponse>> apiResponse = gson.fromJson(response.body(), responseType);
-
             return apiResponse.getData();
         } else {
-            throw new Exception("Lỗi khi gọi API. HTTP code: " + response.statusCode());
+            Type responseType = new TypeToken<ApiResponse<NhanVienResponse>>() {
+            }.getType();
+            ApiResponse<Void> errorResponse = gson.fromJson(response.body(), responseType);
+            throw new Exception(errorResponse.getMessage());
         }
     }
 
     public NhanVienResponse createNhanVien(NhanVienRequest requestDTO) throws Exception {
+        if (requestDTO == null) return null;
+
         String jsonBody = gson.toJson(requestDTO);
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -69,6 +73,8 @@ public class NhanVienApiClient {
     }
 
     public NhanVienResponse updateNhanVien(NhanVienRequest requestDTO) throws Exception {
+        if (requestDTO == null) return null;
+
         String jsonBody = gson.toJson(requestDTO);
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -91,7 +97,9 @@ public class NhanVienApiClient {
         }
     }
 
-    public void deleteNhanVien(int id) throws Exception {
+    public boolean deleteNhanVien(int id) throws Exception {
+        if (id < 1) return false;
+
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(API_URL + "/" + id))
                 .DELETE()
@@ -99,7 +107,9 @@ public class NhanVienApiClient {
 
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-        if (response.statusCode() != 200) {
+        if (response.statusCode() == 200)
+            return true;
+        else {
             Type responseType = new TypeToken<ApiResponse<NhanVienResponse>>() {
             }.getType();
             ApiResponse<Void> errorResponse = gson.fromJson(response.body(), responseType);

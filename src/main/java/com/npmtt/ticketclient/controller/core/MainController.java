@@ -2,12 +2,14 @@ package com.npmtt.ticketclient.controller.core;
 
 import com.npmtt.ticketclient.controller.nhanvien.QLNhanVienController;
 import com.npmtt.ticketclient.controller.nhanvien.TKNhanVienController;
+import com.npmtt.ticketclient.controller.thongke.DoanhThuTheoNgayController;
 import com.npmtt.ticketclient.enums.VaiTro;
 import com.npmtt.ticketclient.util.SessionManager;
 import com.npmtt.ticketclient.view.core.Dashboard;
 import com.npmtt.ticketclient.view.core.MainFrame;
 import com.npmtt.ticketclient.view.nhanvien.QLNhanVienPanel;
 import com.npmtt.ticketclient.view.nhanvien.TKNhanVienPanel;
+import com.npmtt.ticketclient.view.thongke.TabDoanhThuTheoNgay;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -225,7 +227,9 @@ public class MainController {
     private class ThongKeDoanhThuNgayListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            TabDoanhThuTheoNgay tab = new TabDoanhThuTheoNgay();
+            mainFrame.showPanel(tab);
+            new DoanhThuTheoNgayController(tab);
         }
     }
 
