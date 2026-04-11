@@ -144,6 +144,30 @@ public class ThongKeApiClient {
     }
 
     public DefaultCategoryDataset getDoanhThuBayNgay() throws Exception {
-        return new DefaultCategoryDataset();
+        String url = API_URL + "/doanh-thu-7d";
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .GET()
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        if (response.statusCode() == 200) {
+            DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+
+            Type responseType = new TypeToken<ApiResponse<List<DoanhThuBayNgayDTO>>>() {
+            }.getType();
+            ApiResponse<List<DoanhThuBayNgayDTO>> apiResponse = gson.fromJson(response.body(), responseType);
+            List<DoanhThuBayNgayDTO> data = apiResponse.getData();
+            for (DoanhThuBayNgayDTO dto : data) {
+                dataset.addValue(dto.getDoanhThu(), "ngay", dto.getNgay());
+            }
+            return dataset;
+        } else {
+            Type responseType = new TypeToken<ApiResponse<Void>>() {
+            }.getType();
+            ApiResponse<Void> errorResponse = gson.fromJson(response.body(), responseType);
+            throw new Exception(errorResponse.getMessage());
+        }
     }
 }

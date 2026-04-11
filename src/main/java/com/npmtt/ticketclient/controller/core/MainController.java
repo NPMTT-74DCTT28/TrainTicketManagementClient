@@ -64,6 +64,7 @@ public class MainController {
     private void showTrangChu() {
         Dashboard dashboard = new Dashboard();
         mainFrame.showPanel(dashboard);
+        new DashboardController(dashboard);
     }
 
     private void exit() {
