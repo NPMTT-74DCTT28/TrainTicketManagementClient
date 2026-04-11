@@ -34,8 +34,6 @@ public class ThongKeApiClient {
             .create();
 
     public List<DoanhThuTheoNgayDTO> getDoanhThuTheoNgay(LocalDate ngayBatDau, LocalDate ngayKetThuc) throws Exception {
-        if (ngayBatDau == null || ngayKetThuc == null || ngayBatDau.isAfter(ngayKetThuc)) return null;
-
         String url = API_URL + "/doanh-thu-ngay?ngayBatDau=" + ngayBatDau + "&ngayKetThuc=" + ngayKetThuc;
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -44,7 +42,6 @@ public class ThongKeApiClient {
                 .build();
 
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println(response.body());
         if (response.statusCode() == 200) {
             Type responseType = new TypeToken<ApiResponse<List<DoanhThuTheoNgayDTO>>>() {
             }.getType();
@@ -58,20 +55,92 @@ public class ThongKeApiClient {
         }
     }
 
-    public List<DoanhThuTheoTuyenDTO> getDoanhThuTheoTuyen(LocalDate tuNgay, LocalDate denNgay) throws Exception {
-        return List.of();
+    public List<DoanhThuTheoTuyenDTO> getDoanhThuTheoTuyen(LocalDate ngayBatDau, LocalDate ngayKetThuc) throws Exception {
+        String url = API_URL + "/doanh-thu-tuyen?ngayBatDau=" + ngayBatDau + "&ngayKetThuc=" + ngayKetThuc;
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .GET()
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        if (response.statusCode() == 200) {
+            Type responseType = new TypeToken<ApiResponse<List<DoanhThuTheoTuyenDTO>>>() {
+            }.getType();
+            ApiResponse<List<DoanhThuTheoTuyenDTO>> apiResponse = gson.fromJson(response.body(), responseType);
+            return apiResponse.getData();
+        } else {
+            Type responseType = new TypeToken<ApiResponse<Void>>() {
+            }.getType();
+            ApiResponse<Void> apiResponse = gson.fromJson(response.body(), responseType);
+            throw new Exception(apiResponse.getMessage());
+        }
     }
 
-    public List<TyLeLapDayDTO> getTyLeLapDay(LocalDate tuNgay, LocalDate denNgay) throws Exception {
-        return List.of();
+    public List<TyLeLapDayDTO> getTyLeLapDay(LocalDate ngayBatDau, LocalDate ngayKetThuc) throws Exception {
+        String url = API_URL + "/ty-le-lap-day?ngayBatDau=" + ngayBatDau + "&ngayKetThuc=" + ngayKetThuc;
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .GET()
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        if (response.statusCode() == 200) {
+            Type responseType = new TypeToken<ApiResponse<List<TyLeLapDayDTO>>>() {
+            }.getType();
+            ApiResponse<List<TyLeLapDayDTO>> apiResponse = gson.fromJson(response.body(), responseType);
+            return apiResponse.getData();
+        } else {
+            Type responseType = new TypeToken<ApiResponse<Void>>() {
+            }.getType();
+            ApiResponse<Void> apiResponse = gson.fromJson(response.body(), responseType);
+            throw new Exception(apiResponse.getMessage());
+        }
     }
 
     public List<KhachHangVipDTO> getKhachHangVIP(int soLuong) throws Exception {
-        return List.of();
+        String url = API_URL + "/khach-hang-than-thiet?soLuong=" + soLuong;
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .GET()
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        if (response.statusCode() == 200) {
+            Type responseType = new TypeToken<ApiResponse<List<KhachHangVipDTO>>>() {
+            }.getType();
+            ApiResponse<List<KhachHangVipDTO>> apiResponse = gson.fromJson(response.body(), responseType);
+            return apiResponse.getData();
+        } else {
+            Type responseType = new TypeToken<ApiResponse<Void>>() {
+            }.getType();
+            ApiResponse<Void> errorResponse = gson.fromJson(response.body(), responseType);
+            throw new Exception(errorResponse.getMessage());
+        }
     }
 
     public List<DoanhSoDTO> getDoanhSo(int thang, int nam) throws Exception {
-        return List.of();
+        String url = API_URL + "/doanh-so?thang=" + thang + "&nam=" + nam;
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .GET()
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        if (response.statusCode() == 200) {
+            Type responseType = new TypeToken<ApiResponse<List<DoanhSoDTO>>>() {
+            }.getType();
+            ApiResponse<List<DoanhSoDTO>> apiResponse = gson.fromJson(response.body(), responseType);
+            return apiResponse.getData();
+        } else {
+            Type responseType = new TypeToken<ApiResponse<Void>>() {
+            }.getType();
+            ApiResponse<Void> errorResponse = gson.fromJson(response.body(), responseType);
+            throw new Exception(errorResponse.getMessage());
+        }
     }
 
     public DefaultCategoryDataset getDoanhThuBayNgay() throws Exception {
