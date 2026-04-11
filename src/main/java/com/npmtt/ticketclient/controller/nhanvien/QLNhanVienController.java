@@ -116,8 +116,11 @@ public class QLNhanVienController {
             try {
                 if (!panel.showConfirm("Bạn chắc chắn muốn xoá?")) return;
                 int id = Integer.parseInt(tableModel.getValueAt(selectedRow, 0).toString());
-                apiClient.deleteNhanVien(id);
-                panel.showMessage("Xoá nhân viên thành công!");
+                if (apiClient.deleteNhanVien(id)) {
+                    panel.showMessage("Xoá nhân viên thành công!");
+                } else {
+                    panel.showError("Xoá nhân viên thất bại.");
+                }
                 refresh();
             } catch (Exception ex) {
                 ex.printStackTrace();

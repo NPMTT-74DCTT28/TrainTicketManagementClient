@@ -2,12 +2,14 @@ package com.npmtt.ticketclient.controller.core;
 
 import com.npmtt.ticketclient.controller.nhanvien.QLNhanVienController;
 import com.npmtt.ticketclient.controller.nhanvien.TKNhanVienController;
+import com.npmtt.ticketclient.controller.thongke.*;
 import com.npmtt.ticketclient.enums.VaiTro;
 import com.npmtt.ticketclient.util.SessionManager;
 import com.npmtt.ticketclient.view.core.Dashboard;
 import com.npmtt.ticketclient.view.core.MainFrame;
 import com.npmtt.ticketclient.view.nhanvien.QLNhanVienPanel;
 import com.npmtt.ticketclient.view.nhanvien.TKNhanVienPanel;
+import com.npmtt.ticketclient.view.thongke.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -62,6 +64,7 @@ public class MainController {
     private void showTrangChu() {
         Dashboard dashboard = new Dashboard();
         mainFrame.showPanel(dashboard);
+        new DashboardController(dashboard);
     }
 
     private void exit() {
@@ -225,35 +228,45 @@ public class MainController {
     private class ThongKeDoanhThuNgayListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            TabDoanhThuTheoNgay tab = new TabDoanhThuTheoNgay();
+            mainFrame.showPanel(tab);
+            new DoanhThuTheoNgayController(tab);
         }
     }
 
     private class ThongKeDoanhThuTuyenListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            TabDoanhThuTheoTuyen tab = new TabDoanhThuTheoTuyen();
+            mainFrame.showPanel(tab);
+            new DoanhThuTheoTuyenController(tab);
         }
     }
 
     private class ThongKeTyLeLapDayListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            TabTyLeLapDay tab = new TabTyLeLapDay();
+            mainFrame.showPanel(tab);
+            new TyLeLapDayController(tab);
         }
     }
 
     private class ThongKeKhachHangVIPListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            TabKhachHangVip tab = new TabKhachHangVip();
+            mainFrame.showPanel(tab);
+            new KhachHangVipController(tab);
         }
     }
 
     private class ThongKeDoanhSoListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            TabDoanhSo tab = new TabDoanhSo();
+            mainFrame.showPanel(tab);
+            new DoanhSoController(tab);
         }
     }
 
