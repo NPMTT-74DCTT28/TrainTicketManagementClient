@@ -35,14 +35,14 @@ public class MainController {
         mainFrame.addKhachHangListener(new QLKhachHangListener(), new TKKhachHangListener());
         mainFrame.addVeTauListener(new QLVeTauListener(), new TKVeTauListener());
 
-        if (SessionManager.getCurrentUser() == null) {
+        if (SessionManager.getCurrentUser().getToken().isEmpty()) {
             mainFrame.showWarning("Bạn chưa đăng nhập, vui lòng đăng nhập để sử dụng.");
             mainFrame.dispose();
             new DangNhapController();
             return;
         }
         mainFrame.setXinChao(SessionManager.getCurrentUser().getHoTen());
-        String vaiTroString = SessionManager.getCurrentUser().getVaiTro();
+        String vaiTroString = SessionManager.getCurrentUser().getVaiTro().toString();
         VaiTro vaiTro = VaiTro.fromLabel(vaiTroString);
         mainFrame.hienMenuTheoQuyen(vaiTro);
         showTrangChu();
@@ -289,7 +289,7 @@ public class MainController {
         public void actionPerformed(ActionEvent e) {
             if (mainFrame.showConfirm("Bạn chắc chắn muốn đăng xuất?")) {
                 mainFrame.dispose();
-                SessionManager.clearSession();
+                SessionManager.setCurrentUser(null);
                 new DangNhapController();
             }
         }

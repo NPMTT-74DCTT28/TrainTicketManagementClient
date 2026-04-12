@@ -67,14 +67,13 @@ public class ThongTinCaNhanController {
                         .sdt(currentUser.getSdt())
                         .email(currentUser.getEmail())
                         .diaChi(currentUser.getDiaChi())
-                        .vaiTro(currentUser.getVaiTro())
+                        .vaiTro(currentUser.getVaiTro().toString())
                         .build();
 
                 NhanVienResponse result = apiClient.updateNhanVien(request);
                 if (result == null) return;
                 parent.showMessage("Cập nhật thông tin cá nhân thành công!");
                 dialog.dispose();
-                SessionManager.startSession(result);
             } catch (Exception ex) {
                 ex.printStackTrace();
                 parent.showError(ex.getMessage());

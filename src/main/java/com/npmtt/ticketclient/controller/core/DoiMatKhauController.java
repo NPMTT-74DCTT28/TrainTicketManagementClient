@@ -45,7 +45,7 @@ public class DoiMatKhauController {
                         .build();
                 authApiClient.changePassword(request);
                 parent.showMessage("Đổi mật khẩu thành công, vui lòng đăng nhập lại!");
-                SessionManager.clearSession();
+                SessionManager.setCurrentUser(null);
                 dialog.dispose();
                 parent.dispose();
                 new DangNhapController();

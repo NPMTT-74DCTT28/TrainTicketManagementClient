@@ -1,5 +1,6 @@
 package com.npmtt.ticketclient.dto.response;
 
+import com.npmtt.ticketclient.enums.VaiTro;
 import lombok.Data;
 
 @Data
@@ -12,5 +13,6 @@ public class NhanVienResponse {
     private String sdt;
     private String email;
     private String diaChi;
-    private String vaiTro;
+    private VaiTro vaiTro;
+    private String token;
 }
