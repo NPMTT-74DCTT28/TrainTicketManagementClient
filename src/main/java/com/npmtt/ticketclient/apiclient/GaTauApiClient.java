@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import com.npmtt.ticketclient.dto.gatau.GaTauDTO;
 import com.npmtt.ticketclient.dto.response.ApiResponse;
 import com.npmtt.ticketclient.util.ConfigLoader;
+import com.npmtt.ticketclient.util.SessionManager;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -28,6 +29,7 @@ public class GaTauApiClient {
     public List<GaTauDTO> getAllGaTau() throws Exception {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(API_URL))
+                .header("Authorization", "Bearer " + SessionManager.getCurrentUser().getToken())
                 .GET()
                 .build();
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
@@ -50,6 +52,7 @@ public class GaTauApiClient {
                 .uri(URI.create(API_URL))
                 .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
                 .header("Content-Type", "application/json")
+                .header("Authorization", "Bearer " + SessionManager.getCurrentUser().getToken())
                 .build();
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         if (response.statusCode() == 201) {
@@ -71,6 +74,7 @@ public class GaTauApiClient {
                 .uri(URI.create(API_URL))
                 .PUT(HttpRequest.BodyPublishers.ofString(jsonBody))
                 .header("Content-Type", "application/json")
+                .header("Authorization", "Bearer " + SessionManager.getCurrentUser().getToken())
                 .build();
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         System.out.println(response.body());
@@ -90,6 +94,7 @@ public class GaTauApiClient {
         if (id < 1) return false;
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(API_URL + "/" + id))
+                .header("Authorization", "Bearer " + SessionManager.getCurrentUser().getToken())
                 .DELETE()
                 .build();
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
@@ -106,6 +111,7 @@ public class GaTauApiClient {
         String url = API_URL + "/search?key=" + URLEncoder.encode(keyword, StandardCharsets.UTF_8);
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
+                .header("Authorization", "Bearer " + SessionManager.getCurrentUser().getToken())
                 .GET()
                 .build();
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
