@@ -6,6 +6,7 @@ import com.npmtt.ticketclient.dto.request.NhanVienRequest;
 import com.npmtt.ticketclient.dto.response.ApiResponse;
 import com.npmtt.ticketclient.dto.response.NhanVienResponse;
 import com.npmtt.ticketclient.util.ConfigLoader;
+import com.npmtt.ticketclient.util.SessionManager;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -30,6 +31,7 @@ public class NhanVienApiClient {
     public List<NhanVienResponse> getAllNhanVien() throws Exception {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(API_URL))
+                .header("Authorization", "Bearer " + SessionManager.getCurrentUser().getToken())
                 .GET()
                 .build();
 
@@ -54,6 +56,7 @@ public class NhanVienApiClient {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(API_URL))
+                .header("Authorization", "Bearer " + SessionManager.getCurrentUser().getToken())
                 .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
                 .build();
@@ -79,6 +82,7 @@ public class NhanVienApiClient {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(API_URL))
+                .header("Authorization", "Bearer " + SessionManager.getCurrentUser().getToken())
                 .header("Content-Type", "application/json")
                 .PUT(HttpRequest.BodyPublishers.ofString(jsonBody))
                 .build();
@@ -102,6 +106,7 @@ public class NhanVienApiClient {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(API_URL + "/" + id))
+                .header("Authorization", "Bearer " + SessionManager.getCurrentUser().getToken())
                 .DELETE()
                 .build();
 
@@ -132,6 +137,7 @@ public class NhanVienApiClient {
 
         HttpRequest httpRequest = HttpRequest.newBuilder()
                 .uri(URI.create(urlBuilder.toString()))
+                .header("Authorization", "Bearer " + SessionManager.getCurrentUser().getToken())
                 .GET()
                 .build();
 

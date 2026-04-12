@@ -58,7 +58,7 @@ public class DangNhapController {
                         .matKhau(matKhau)
                         .build();
                 NhanVienResponse user = apiClient.login(request);
-                SessionManager.startSession(user);
+                SessionManager.setCurrentUser(user);
                 frame.dispose();
                 new MainController(new MainFrame());
             } catch (Exception ex) {

@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import com.npmtt.ticketclient.dto.response.ApiResponse;
 import com.npmtt.ticketclient.dto.thongke.*;
 import com.npmtt.ticketclient.util.ConfigLoader;
+import com.npmtt.ticketclient.util.SessionManager;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -38,6 +39,7 @@ public class ThongKeApiClient {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
+                .header("Authorization", "Bearer " + SessionManager.getCurrentUser().getToken())
                 .GET()
                 .build();
 
@@ -60,6 +62,7 @@ public class ThongKeApiClient {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
+                .header("Authorization", "Bearer " + SessionManager.getCurrentUser().getToken())
                 .GET()
                 .build();
 
@@ -82,6 +85,7 @@ public class ThongKeApiClient {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
+                .header("Authorization", "Bearer " + SessionManager.getCurrentUser().getToken())
                 .GET()
                 .build();
 
@@ -104,6 +108,7 @@ public class ThongKeApiClient {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
+                .header("Authorization", "Bearer " + SessionManager.getCurrentUser().getToken())
                 .GET()
                 .build();
 
@@ -126,6 +131,7 @@ public class ThongKeApiClient {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
+                .header("Authorization", "Bearer " + SessionManager.getCurrentUser().getToken())
                 .GET()
                 .build();
 
@@ -148,6 +154,7 @@ public class ThongKeApiClient {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
+                .header("Authorization", "Bearer " + SessionManager.getCurrentUser().getToken())
                 .GET()
                 .build();
 

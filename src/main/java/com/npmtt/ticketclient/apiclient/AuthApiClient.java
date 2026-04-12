@@ -7,6 +7,7 @@ import com.npmtt.ticketclient.dto.request.LoginRequest;
 import com.npmtt.ticketclient.dto.response.ApiResponse;
 import com.npmtt.ticketclient.dto.response.NhanVienResponse;
 import com.npmtt.ticketclient.util.ConfigLoader;
+import com.npmtt.ticketclient.util.SessionManager;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -41,10 +42,7 @@ public class AuthApiClient {
             ApiResponse<NhanVienResponse> apiResponse = gson.fromJson(response.body(), responseType);
             return apiResponse.getData();
         } else {
-            Type responseType = new TypeToken<ApiResponse<Void>>() {
-            }.getType();
-            ApiResponse<Void> errorResponse = gson.fromJson(response.body(), responseType);
-            throw new Exception(errorResponse.getMessage());
+            throw new Exception("Lỗi khi gọi API đăng nhập. HTTP code: " + response.statusCode());
         }
     }
 
@@ -52,6 +50,7 @@ public class AuthApiClient {
         String jsonBody = gson.toJson(cpRequest);
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(API_URL + "/change-pw"))
+                .header("Authorization", "Bearer " + SessionManager.getCurrentUser().getToken())
                 .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
                 .build();
