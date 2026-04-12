@@ -1,5 +1,7 @@
 package com.npmtt.ticketclient.controller.core;
 
+import com.npmtt.ticketclient.controller.gatau.QLGaTauController;
+import com.npmtt.ticketclient.controller.gatau.TKGaTauController;
 import com.npmtt.ticketclient.controller.nhanvien.QLNhanVienController;
 import com.npmtt.ticketclient.controller.nhanvien.TKNhanVienController;
 import com.npmtt.ticketclient.controller.thongke.*;
@@ -7,6 +9,8 @@ import com.npmtt.ticketclient.enums.VaiTro;
 import com.npmtt.ticketclient.util.SessionManager;
 import com.npmtt.ticketclient.view.core.Dashboard;
 import com.npmtt.ticketclient.view.core.MainFrame;
+import com.npmtt.ticketclient.view.gatau.QLGaTauPanel;
+import com.npmtt.ticketclient.view.gatau.TKGaTauPanel;
 import com.npmtt.ticketclient.view.nhanvien.QLNhanVienPanel;
 import com.npmtt.ticketclient.view.nhanvien.TKNhanVienPanel;
 import com.npmtt.ticketclient.view.thongke.*;
@@ -158,14 +162,18 @@ public class MainController {
     private class QLGaTauListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            QLGaTauPanel panel = new QLGaTauPanel();
+            mainFrame.showPanel(panel);
+            new QLGaTauController(panel);
         }
     }
 
     private class TKGaTauListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            TKGaTauPanel panel = new TKGaTauPanel();
+            mainFrame.showPanel(panel);
+            new TKGaTauController(panel);
         }
     }
 
