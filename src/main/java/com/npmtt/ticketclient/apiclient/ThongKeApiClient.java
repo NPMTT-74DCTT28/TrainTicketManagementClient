@@ -30,7 +30,7 @@ public class ThongKeApiClient {
                     (JsonDeserializer<LocalDate>) (json, type, context) ->
                             LocalDate.parse(json.toString().replace("\"", "").trim()))
             .registerTypeAdapter(LocalDate.class,
-                    (JsonSerializer<LocalDate>) (src, typOfSrc, context) ->
+                    (JsonSerializer<LocalDate>) (src, typeOfSrc, context) ->
                             new JsonPrimitive(src.toString()))
             .create();
 
