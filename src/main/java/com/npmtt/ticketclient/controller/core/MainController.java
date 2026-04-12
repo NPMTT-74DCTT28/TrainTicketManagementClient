@@ -5,6 +5,8 @@ import com.npmtt.ticketclient.controller.gatau.TKGaTauController;
 import com.npmtt.ticketclient.controller.nhanvien.QLNhanVienController;
 import com.npmtt.ticketclient.controller.nhanvien.TKNhanVienController;
 import com.npmtt.ticketclient.controller.thongke.*;
+import com.npmtt.ticketclient.controller.tuyenduong.QLTuyenDuongController;
+import com.npmtt.ticketclient.controller.tuyenduong.TKTuyenDuongController;
 import com.npmtt.ticketclient.enums.VaiTro;
 import com.npmtt.ticketclient.util.SessionManager;
 import com.npmtt.ticketclient.view.core.Dashboard;
@@ -14,6 +16,8 @@ import com.npmtt.ticketclient.view.gatau.TKGaTauPanel;
 import com.npmtt.ticketclient.view.nhanvien.QLNhanVienPanel;
 import com.npmtt.ticketclient.view.nhanvien.TKNhanVienPanel;
 import com.npmtt.ticketclient.view.thongke.*;
+import com.npmtt.ticketclient.view.tuyenduong.QLTuyenDuongPanel;
+import com.npmtt.ticketclient.view.tuyenduong.TKTuyenDuongPanel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -180,14 +184,18 @@ public class MainController {
     private class QLTuyenDuongListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            QLTuyenDuongPanel panel = new QLTuyenDuongPanel();
+            mainFrame.showPanel(panel);
+            new QLTuyenDuongController(panel);
         }
     }
 
     private class TKTuyenDuongListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            TKTuyenDuongPanel panel = new TKTuyenDuongPanel();
+            mainFrame.showPanel(panel);
+            new TKTuyenDuongController(panel);
         }
     }
 
