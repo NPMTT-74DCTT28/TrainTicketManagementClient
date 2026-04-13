@@ -70,7 +70,7 @@ public class ThongTinCaNhanController {
                         .vaiTro(currentUser.getVaiTro().toString())
                         .build();
 
-                NhanVienResponse result = apiClient.updateNhanVien(request);
+                NhanVienResponse result = apiClient.updateInfo(request);
                 if (result == null) return;
                 parent.showMessage("Cập nhật thông tin cá nhân thành công!");
                 dialog.dispose();

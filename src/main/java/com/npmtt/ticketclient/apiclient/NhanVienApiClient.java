@@ -28,14 +28,7 @@ public class NhanVienApiClient {
     private final HttpClient httpClient = HttpClient.newHttpClient();
     private final Gson gson = new Gson();
 
-    public List<NhanVienResponse> getAllNhanVien() throws Exception {
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(API_URL))
-                .header("Authorization", "Bearer " + SessionManager.getCurrentUser().getToken())
-                .GET()
-                .build();
-
-        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+    private List<NhanVienResponse> getListNhanVienResponse(HttpResponse<String> response) throws Exception {
         if (response.statusCode() == 200) {
             Type responseType = new TypeToken<ApiResponse<List<NhanVienResponse>>>() {
             }.getType();
@@ -47,6 +40,32 @@ public class NhanVienApiClient {
             ApiResponse<Void> errorResponse = gson.fromJson(response.body(), responseType);
             throw new Exception(errorResponse.getMessage());
         }
+    }
+
+    private NhanVienResponse getNhanVienResponse(HttpRequest request) throws Exception {
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        if (response.statusCode() == 200) {
+            Type responseType = new TypeToken<ApiResponse<NhanVienResponse>>() {
+            }.getType();
+            ApiResponse<NhanVienResponse> apiResponse = gson.fromJson(response.body(), responseType);
+            return apiResponse.getData();
+        } else {
+            Type responseType = new TypeToken<ApiResponse<Void>>() {
+            }.getType();
+            ApiResponse<Void> errorResponse = gson.fromJson(response.body(), responseType);
+            throw new Exception(errorResponse.getMessage());
+        }
+    }
+
+    public List<NhanVienResponse> getAllNhanVien() throws Exception {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(API_URL))
+                .header("Authorization", "Bearer " + SessionManager.getCurrentUser().getToken())
+                .GET()
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        return getListNhanVienResponse(response);
     }
 
     public NhanVienResponse createNhanVien(NhanVienRequest requestDTO) throws Exception {
@@ -87,18 +106,22 @@ public class NhanVienApiClient {
                 .PUT(HttpRequest.BodyPublishers.ofString(jsonBody))
                 .build();
 
-        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-        if (response.statusCode() == 200) {
-            Type responseType = new TypeToken<ApiResponse<NhanVienResponse>>() {
-            }.getType();
-            ApiResponse<NhanVienResponse> apiResponse = gson.fromJson(response.body(), responseType);
-            return apiResponse.getData();
-        } else {
-            Type responseType = new TypeToken<ApiResponse<Void>>() {
-            }.getType();
-            ApiResponse<Void> errorResponse = gson.fromJson(response.body(), responseType);
-            throw new Exception(errorResponse.getMessage());
-        }
+        return getNhanVienResponse(request);
+    }
+
+    public NhanVienResponse updateInfo(NhanVienRequest requestDTO) throws Exception {
+        if (requestDTO == null) return null;
+
+        String jsonBody = gson.toJson(requestDTO);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(API_URL + "personal-info"))
+                .header("Authorization", "Bearer " + SessionManager.getCurrentUser().getToken())
+                .header("Content-Type", "application/json")
+                .PUT(HttpRequest.BodyPublishers.ofString(jsonBody))
+                .build();
+
+        return getNhanVienResponse(request);
     }
 
     public boolean deleteNhanVien(int id) throws Exception {
@@ -142,16 +165,6 @@ public class NhanVienApiClient {
                 .build();
 
         HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-        if (httpResponse.statusCode() == 200) {
-            Type responseType = new TypeToken<ApiResponse<List<NhanVienResponse>>>() {
-            }.getType();
-            ApiResponse<List<NhanVienResponse>> apiResponse = gson.fromJson(httpResponse.body(), responseType);
-            return apiResponse.getData();
-        } else {
-            Type responseType = new TypeToken<ApiResponse<Void>>() {
-            }.getType();
-            ApiResponse<Void> errorResponse = gson.fromJson(httpResponse.body(), responseType);
-            throw new Exception(errorResponse.getMessage());
-        }
+        return getListNhanVienResponse(httpResponse);
     }
 }
