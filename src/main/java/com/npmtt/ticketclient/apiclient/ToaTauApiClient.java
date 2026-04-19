@@ -37,8 +37,9 @@ public class ToaTauApiClient {
             ApiResponse<List<ToaTauResponse>> apiResponse = gson.fromJson(response.body(), responseType);
             return apiResponse.getData();
         } else {
-            Type errorType = new TypeToken<ApiResponse<Void>>(){}.getType();
-            ApiResponse<Void> errorResponse = gson.fromJson(response.body(), errorType);
+            Type errorType = new TypeToken<ApiResponse<Object>>() {
+            }.getType();
+            ApiResponse<Object> errorResponse = gson.fromJson(response.body(), errorType);
             throw new Exception(errorResponse.getMessage());
         }
     }
@@ -58,8 +59,9 @@ public class ToaTauApiClient {
             ApiResponse<ToaTauResponse> apiResponse = gson.fromJson(response.body(), responseType);
             return apiResponse.getData();
         } else {
-            Type errorType = new TypeToken<ApiResponse<Void>>(){}.getType();
-            ApiResponse<Void> errorResponse = gson.fromJson(response.body(), errorType);
+            Type errorType = new TypeToken<ApiResponse<Object>>() {
+            }.getType();
+            ApiResponse<Object> errorResponse = gson.fromJson(response.body(), errorType);
             throw new Exception(errorResponse.getMessage());
         }
     }
@@ -79,8 +81,9 @@ public class ToaTauApiClient {
             ApiResponse<ToaTauResponse> apiResponse = gson.fromJson(response.body(), responseType);
             return apiResponse.getData();
         } else {
-            Type errorType = new TypeToken<ApiResponse<Void>>(){}.getType();
-            ApiResponse<Void> errorResponse = gson.fromJson(response.body(), errorType);
+            Type errorType = new TypeToken<ApiResponse<Object>>() {
+            }.getType();
+            ApiResponse<Object> errorResponse = gson.fromJson(response.body(), errorType);
             throw new Exception(errorResponse.getMessage());
         }
     }
@@ -96,8 +99,9 @@ public class ToaTauApiClient {
         if (response.statusCode() == 200) {
             return true;
         } else {
-            Type errorType = new TypeToken<ApiResponse<Void>>(){}.getType();
-            ApiResponse<Void> errorResponse = gson.fromJson(response.body(), errorType);
+            Type errorType = new TypeToken<ApiResponse<Object>>() {
+            }.getType();
+            ApiResponse<Object> errorResponse = gson.fromJson(response.body(), errorType);
             throw new Exception(errorResponse.getMessage());
         }
     }
@@ -115,8 +119,9 @@ public class ToaTauApiClient {
             ApiResponse<List<ToaTauResponse>> apiResponse = gson.fromJson(response.body(), responseType);
             return apiResponse.getData();
         } else {
-            Type errorType = new TypeToken<ApiResponse<Void>>(){}.getType();
-            ApiResponse<Void> errorResponse = gson.fromJson(response.body(), errorType);
+            Type errorType = new TypeToken<ApiResponse<Object>>() {
+            }.getType();
+            ApiResponse<Object> errorResponse = gson.fromJson(response.body(), errorType);
             throw new Exception(errorResponse.getMessage());
         }
     }

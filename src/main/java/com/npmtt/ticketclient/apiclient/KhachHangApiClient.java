@@ -36,10 +36,10 @@ public class KhachHangApiClient {
             ApiResponse<List<KhachHangResponse>> apiResponse = gson.fromJson(response.body(), responseType);
             return apiResponse.getData();
         }else {
-            Type responseType = new TypeToken<ApiResponse<Void>>() {
+            Type responseType = new TypeToken<ApiResponse<Object>>() {
 
             }.getType();
-            ApiResponse<Void> errorResponse = gson.fromJson(response.body(), responseType);
+            ApiResponse<Object> errorResponse = gson.fromJson(response.body(), responseType);
             throw new Exception(errorResponse.getMessage());
         }
     }
@@ -53,10 +53,10 @@ public class KhachHangApiClient {
             ApiResponse<KhachHangResponse> apiResponse = gson.fromJson(response.body(), responseType);
             return apiResponse.getData();
         }else {
-            Type responseType = new TypeToken<ApiResponse<Void>>() {
+            Type responseType = new TypeToken<ApiResponse<Object>>() {
 
             }.getType();
-            ApiResponse<Void> errorResponse = gson.fromJson(response.body(), responseType);
+            ApiResponse<Object> errorResponse = gson.fromJson(response.body(), responseType);
             throw new Exception(errorResponse.getMessage());
         }
     }
@@ -92,10 +92,10 @@ public class KhachHangApiClient {
             ApiResponse<KhachHangResponse> apiResponse = gson.fromJson(response.body(), responseType);
             return apiResponse.getData();
         } else {
-            Type responseType = new TypeToken<ApiResponse<Void>>() {
+            Type responseType = new TypeToken<ApiResponse<Object>>() {
 
             }.getType();
-            ApiResponse<Void> errorResponse = gson.fromJson(response.body(), responseType);
+            ApiResponse<Object> errorResponse = gson.fromJson(response.body(), responseType);
             throw new Exception(errorResponse.getMessage());
         }
     }
@@ -107,21 +107,6 @@ public class KhachHangApiClient {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(API_URL))
-                .PUT(HttpRequest.BodyPublishers.ofString(jsonBody))
-                .header("Content-Type", "application/json")
-                .header("Authorization", "Bearer " + SessionManager.getCurrentUser().getToken())
-                .build();
-
-        return getKhachHangResponse(request);
-    }
-
-    public KhachHangResponse updateInfo(KhachHangRequest requestDTO) throws Exception {
-        if (requestDTO == null) return null;
-
-        String jsonBody = gson.toJson(requestDTO);
-
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(API_URL + "/info"))
                 .PUT(HttpRequest.BodyPublishers.ofString(jsonBody))
                 .header("Content-Type", "application/json")
                 .header("Authorization", "Bearer " + SessionManager.getCurrentUser().getToken())
@@ -144,10 +129,10 @@ public class KhachHangApiClient {
         if (response.statusCode() == 200)
             return true;
         else {
-            Type responseType = new TypeToken<ApiResponse<Void>>() {
+            Type responseType = new TypeToken<ApiResponse<Object>>() {
 
             }.getType();
-            ApiResponse<Void> errorResponse = gson.fromJson(response.body(), responseType);
+            ApiResponse<Object> errorResponse = gson.fromJson(response.body(), responseType);
             throw new Exception(errorResponse.getMessage());
         }
     }

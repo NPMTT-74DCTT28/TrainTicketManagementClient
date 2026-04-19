@@ -41,7 +41,7 @@ public class GaTauApiClient {
         } else {
             Type responseType = new TypeToken<ApiResponse<GaTauDTO>>() {
             }.getType();
-            ApiResponse<Void> errorResponse = gson.fromJson(response.body(), responseType);
+            ApiResponse<Object> errorResponse = gson.fromJson(response.body(), responseType);
             throw new Exception(errorResponse.getMessage());
         }
     }
@@ -63,7 +63,7 @@ public class GaTauApiClient {
         } else {
             Type responseType = new TypeToken<ApiResponse<GaTauDTO>>() {
             }.getType();
-            ApiResponse<Void> errorResponse = gson.fromJson(response.body(), responseType);
+            ApiResponse<Object> errorResponse = gson.fromJson(response.body(), responseType);
             throw new Exception(errorResponse.getMessage());
         }
     }
@@ -86,7 +86,7 @@ public class GaTauApiClient {
         } else {
             Type responseType = new TypeToken<ApiResponse<GaTauDTO>>() {
             }.getType();
-            ApiResponse<Void> errorResponse = gson.fromJson(response.body(), responseType);
+            ApiResponse<Object> errorResponse = gson.fromJson(response.body(), responseType);
             throw new Exception(errorResponse.getMessage());
         }
     }
@@ -103,7 +103,7 @@ public class GaTauApiClient {
         } else {
             Type responseType = new TypeToken<ApiResponse<GaTauDTO>>() {
             }.getType();
-            ApiResponse<Void> errorResponse = gson.fromJson(response.body(), responseType);
+            ApiResponse<Object> errorResponse = gson.fromJson(response.body(), responseType);
             throw new Exception(errorResponse.getMessage());
         }
     }
@@ -123,7 +123,7 @@ public class GaTauApiClient {
         }else{
             Type responeType = new TypeToken<ApiResponse<GaTauDTO>>() {
             }.getType();
-            ApiResponse<Void> errorResponse = gson.fromJson(response.body(), responeType);
+            ApiResponse<Object> errorResponse = gson.fromJson(response.body(), responeType);
             throw new Exception(errorResponse.getMessage());
         }
     }

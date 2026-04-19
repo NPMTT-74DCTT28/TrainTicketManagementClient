@@ -39,7 +39,7 @@ public class TuyenDuongApiclient {
             return apiResponse.getData();
         }else{
             Type responeType = new TypeToken<ApiResponse<TuyenDuongResponse>>(){}.getType();
-            ApiResponse<Void> errorResponse = gson.fromJson(response.body(), responeType);
+            ApiResponse<Object> errorResponse = gson.fromJson(response.body(), responeType);
             throw new Exception(errorResponse.getMessage());
         }
     }
@@ -60,7 +60,7 @@ public class TuyenDuongApiclient {
             return apiResponse.getData();
         }else{
             Type responeType = new TypeToken<ApiResponse<TuyenDuongResponse>>(){}.getType();
-            ApiResponse<Void> errorResponse = gson.fromJson(response.body(), responeType);
+            ApiResponse<Object> errorResponse = gson.fromJson(response.body(), responeType);
             throw new Exception(errorResponse.getMessage());
         }
     }
@@ -81,7 +81,7 @@ public class TuyenDuongApiclient {
             return apiResponse.getData();
         }else{
             Type responeType = new TypeToken<ApiResponse<TuyenDuongResponse>>(){}.getType();
-            ApiResponse<Void> errorResponse = gson.fromJson(response.body(), responeType);
+            ApiResponse<Object> errorResponse = gson.fromJson(response.body(), responeType);
             throw new Exception(errorResponse.getMessage());
         }
     }
@@ -97,7 +97,7 @@ public class TuyenDuongApiclient {
             return true;
         }else {
             Type responeType = new TypeToken<ApiResponse<TuyenDuongResponse>>(){}.getType();
-            ApiResponse<Void> errorResponse = gson.fromJson(response.body(), responeType);
+            ApiResponse<Object> errorResponse = gson.fromJson(response.body(), responeType);
             throw new Exception(errorResponse.getMessage());
         }
     }
@@ -116,7 +116,7 @@ public class TuyenDuongApiclient {
             return apiResponse.getData();
         }else{
             Type responeType = new TypeToken<ApiResponse<TuyenDuongResponse>>(){}.getType();
-            ApiResponse<Void> errorResponse = gson.fromJson(response.body(), responeType);
+            ApiResponse<Object> errorResponse = gson.fromJson(response.body(), responeType);
             throw new Exception(errorResponse.getMessage());
         }
     }

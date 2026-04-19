@@ -50,9 +50,9 @@ public class ThongKeApiClient {
             ApiResponse<List<DoanhThuTheoNgayDTO>> apiResponse = gson.fromJson(response.body(), responseType);
             return apiResponse.getData();
         } else {
-            Type responseType = new TypeToken<ApiResponse<Void>>() {
+            Type responseType = new TypeToken<ApiResponse<Object>>() {
             }.getType();
-            ApiResponse<Void> apiResponse = gson.fromJson(response.body(), responseType);
+            ApiResponse<Object> apiResponse = gson.fromJson(response.body(), responseType);
             throw new Exception(apiResponse.getMessage());
         }
     }
@@ -73,9 +73,9 @@ public class ThongKeApiClient {
             ApiResponse<List<DoanhThuTheoTuyenDTO>> apiResponse = gson.fromJson(response.body(), responseType);
             return apiResponse.getData();
         } else {
-            Type responseType = new TypeToken<ApiResponse<Void>>() {
+            Type responseType = new TypeToken<ApiResponse<Object>>() {
             }.getType();
-            ApiResponse<Void> apiResponse = gson.fromJson(response.body(), responseType);
+            ApiResponse<Object> apiResponse = gson.fromJson(response.body(), responseType);
             throw new Exception(apiResponse.getMessage());
         }
     }
@@ -96,9 +96,9 @@ public class ThongKeApiClient {
             ApiResponse<List<TyLeLapDayDTO>> apiResponse = gson.fromJson(response.body(), responseType);
             return apiResponse.getData();
         } else {
-            Type responseType = new TypeToken<ApiResponse<Void>>() {
+            Type responseType = new TypeToken<ApiResponse<Object>>() {
             }.getType();
-            ApiResponse<Void> apiResponse = gson.fromJson(response.body(), responseType);
+            ApiResponse<Object> apiResponse = gson.fromJson(response.body(), responseType);
             throw new Exception(apiResponse.getMessage());
         }
     }
@@ -119,9 +119,9 @@ public class ThongKeApiClient {
             ApiResponse<List<KhachHangVipDTO>> apiResponse = gson.fromJson(response.body(), responseType);
             return apiResponse.getData();
         } else {
-            Type responseType = new TypeToken<ApiResponse<Void>>() {
+            Type responseType = new TypeToken<ApiResponse<Object>>() {
             }.getType();
-            ApiResponse<Void> errorResponse = gson.fromJson(response.body(), responseType);
+            ApiResponse<Object> errorResponse = gson.fromJson(response.body(), responseType);
             throw new Exception(errorResponse.getMessage());
         }
     }
@@ -142,9 +142,9 @@ public class ThongKeApiClient {
             ApiResponse<List<DoanhSoDTO>> apiResponse = gson.fromJson(response.body(), responseType);
             return apiResponse.getData();
         } else {
-            Type responseType = new TypeToken<ApiResponse<Void>>() {
+            Type responseType = new TypeToken<ApiResponse<Object>>() {
             }.getType();
-            ApiResponse<Void> errorResponse = gson.fromJson(response.body(), responseType);
+            ApiResponse<Object> errorResponse = gson.fromJson(response.body(), responseType);
             throw new Exception(errorResponse.getMessage());
         }
     }
@@ -171,9 +171,9 @@ public class ThongKeApiClient {
             }
             return dataset;
         } else {
-            Type responseType = new TypeToken<ApiResponse<Void>>() {
+            Type responseType = new TypeToken<ApiResponse<Object>>() {
             }.getType();
-            ApiResponse<Void> errorResponse = gson.fromJson(response.body(), responseType);
+            ApiResponse<Object> errorResponse = gson.fromJson(response.body(), responseType);
             throw new Exception(errorResponse.getMessage());
         }
     }
