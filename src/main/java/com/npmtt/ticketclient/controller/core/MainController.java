@@ -2,6 +2,8 @@ package com.npmtt.ticketclient.controller.core;
 
 import com.npmtt.ticketclient.controller.gatau.QLGaTauController;
 import com.npmtt.ticketclient.controller.gatau.TKGaTauController;
+import com.npmtt.ticketclient.controller.khachhang.QLKhachHangController;
+import com.npmtt.ticketclient.controller.khachhang.TKKhachHangController;
 import com.npmtt.ticketclient.controller.lichtrinh.QLLichTrinhController;
 import com.npmtt.ticketclient.controller.lichtrinh.TKLichTrinhController;
 import com.npmtt.ticketclient.controller.nhanvien.QLNhanVienController;
@@ -17,6 +19,8 @@ import com.npmtt.ticketclient.view.core.Dashboard;
 import com.npmtt.ticketclient.view.core.MainFrame;
 import com.npmtt.ticketclient.view.gatau.QLGaTauPanel;
 import com.npmtt.ticketclient.view.gatau.TKGaTauPanel;
+import com.npmtt.ticketclient.view.khachhang.QLKhachHangPanel;
+import com.npmtt.ticketclient.view.khachhang.TKKhachHangPanel;
 import com.npmtt.ticketclient.view.lichtrinh.QLLichTrinhPanel;
 import com.npmtt.ticketclient.view.lichtrinh.TKLichTrinhPanel;
 import com.npmtt.ticketclient.view.nhanvien.QLNhanVienPanel;
@@ -232,6 +236,10 @@ public class MainController {
     private class QLKhachHangListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            QLKhachHangPanel panel = new QLKhachHangPanel();
+            mainFrame.showPanel(panel);
+            new QLKhachHangController(panel);
+
 
         }
     }
@@ -239,6 +247,9 @@ public class MainController {
     private class TKKhachHangListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            TKKhachHangPanel panel = new TKKhachHangPanel();
+            mainFrame.showPanel(panel);
+            new TKKhachHangController(panel);
 
         }
     }
