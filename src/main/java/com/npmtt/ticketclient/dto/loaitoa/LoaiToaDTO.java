@@ -14,4 +14,9 @@ public class LoaiToaDTO {
         this.tenLoai = tenLoai;
         this.heSoGia = heSoGia;
     }
+
+    @Override
+    public String toString() {
+        return tenLoai;
+    }
 }

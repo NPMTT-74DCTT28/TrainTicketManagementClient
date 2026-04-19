@@ -11,4 +11,9 @@ public class TuyenDuongResponse {
     private Integer idGaDen;
     private double khoangCachKm;
     private double giaCoBan;
+
+    @Override
+    public String toString() {
+        return tenTuyen;
+    }
 }
