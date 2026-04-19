@@ -2,9 +2,13 @@ package com.npmtt.ticketclient.controller.core;
 
 import com.npmtt.ticketclient.controller.gatau.QLGaTauController;
 import com.npmtt.ticketclient.controller.gatau.TKGaTauController;
+import com.npmtt.ticketclient.controller.lichtrinh.QLLichTrinhController;
+import com.npmtt.ticketclient.controller.lichtrinh.TKLichTrinhController;
 import com.npmtt.ticketclient.controller.nhanvien.QLNhanVienController;
 import com.npmtt.ticketclient.controller.nhanvien.TKNhanVienController;
 import com.npmtt.ticketclient.controller.thongke.*;
+import com.npmtt.ticketclient.controller.toatau.QLToaTauController;
+import com.npmtt.ticketclient.controller.toatau.TKToaTauController;
 import com.npmtt.ticketclient.controller.tuyenduong.QLTuyenDuongController;
 import com.npmtt.ticketclient.controller.tuyenduong.TKTuyenDuongController;
 import com.npmtt.ticketclient.enums.VaiTro;
@@ -13,9 +17,13 @@ import com.npmtt.ticketclient.view.core.Dashboard;
 import com.npmtt.ticketclient.view.core.MainFrame;
 import com.npmtt.ticketclient.view.gatau.QLGaTauPanel;
 import com.npmtt.ticketclient.view.gatau.TKGaTauPanel;
+import com.npmtt.ticketclient.view.lichtrinh.QLLichTrinhPanel;
+import com.npmtt.ticketclient.view.lichtrinh.TKLichTrinhPanel;
 import com.npmtt.ticketclient.view.nhanvien.QLNhanVienPanel;
 import com.npmtt.ticketclient.view.nhanvien.TKNhanVienPanel;
 import com.npmtt.ticketclient.view.thongke.*;
+import com.npmtt.ticketclient.view.toatau.QLToaTauPanel;
+import com.npmtt.ticketclient.view.toatau.TKToaTauPanel;
 import com.npmtt.ticketclient.view.tuyenduong.QLTuyenDuongPanel;
 import com.npmtt.ticketclient.view.tuyenduong.TKTuyenDuongPanel;
 
@@ -138,14 +146,18 @@ public class MainController {
     private class QLToaTauListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            QLToaTauPanel panel = new QLToaTauPanel();
+            mainFrame.showPanel(panel);
+            new QLToaTauController(panel);
         }
     }
 
     private class TKToaTauListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            TKToaTauPanel panel = new TKToaTauPanel();
+            mainFrame.showPanel(panel);
+            new TKToaTauController(panel);
         }
     }
 
@@ -202,14 +214,18 @@ public class MainController {
     private class QLLichTrinhListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            QLLichTrinhPanel panel = new QLLichTrinhPanel();
+            mainFrame.showPanel(panel);
+            new QLLichTrinhController(panel);
         }
     }
 
     private class TKLichTrinhListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            TKLichTrinhPanel panel = new TKLichTrinhPanel();
+            mainFrame.showPanel(panel);
+            new TKLichTrinhController(panel);
         }
     }
 

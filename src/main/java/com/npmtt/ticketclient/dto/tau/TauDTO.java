@@ -12,4 +12,9 @@ public class TauDTO {
         this.maTau = maTau;
         this.tenTau = tenTau;
     }
+
+    @Override
+    public String toString() {
+        return tenTau;
+    }
 }
