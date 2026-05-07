@@ -8,4 +8,9 @@ public class ToaTauResponse {
     private String maToa;
     private Integer idTau;
     private Integer idLoaiToa;
+    @Override
+    public String toString() {
+        return this.maToa;
+    }
 }
+
