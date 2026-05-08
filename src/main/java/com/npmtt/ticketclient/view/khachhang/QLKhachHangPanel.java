@@ -280,7 +280,6 @@ public final class QLKhachHangPanel extends BasePanel {
 
     public void startEditMode() {
         isEditMode = true;
-
         fieldCccd.setEnabled(false);
 
         buttonThem.setEnabled(false);
@@ -289,6 +288,7 @@ public final class QLKhachHangPanel extends BasePanel {
         buttonReset.setEnabled(true);
         buttonRefresh.setEnabled(true);
     }
+
 
     public void resetForm() {
         isEditMode = false;

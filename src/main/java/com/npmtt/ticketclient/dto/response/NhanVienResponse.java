@@ -15,4 +15,9 @@ public class NhanVienResponse {
     private String diaChi;
     private VaiTro vaiTro;
     private String token;
+
+    @Override
+    public String toString() {
+        return maNhanVien + " - " + hoTen;
+    }
 }

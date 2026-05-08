@@ -19,6 +19,8 @@ import com.npmtt.ticketclient.controller.toatau.QLToaTauController;
 import com.npmtt.ticketclient.controller.toatau.TKToaTauController;
 import com.npmtt.ticketclient.controller.tuyenduong.QLTuyenDuongController;
 import com.npmtt.ticketclient.controller.tuyenduong.TKTuyenDuongController;
+import com.npmtt.ticketclient.controller.vetau.QLVeTauController;
+import com.npmtt.ticketclient.controller.vetau.TKVeTauController;
 import com.npmtt.ticketclient.enums.VaiTro;
 import com.npmtt.ticketclient.util.SessionManager;
 import com.npmtt.ticketclient.view.core.Dashboard;
@@ -42,6 +44,8 @@ import com.npmtt.ticketclient.view.toatau.QLToaTauPanel;
 import com.npmtt.ticketclient.view.toatau.TKToaTauPanel;
 import com.npmtt.ticketclient.view.tuyenduong.QLTuyenDuongPanel;
 import com.npmtt.ticketclient.view.tuyenduong.TKTuyenDuongPanel;
+import com.npmtt.ticketclient.view.vetau.QLVeTauPanel;
+import com.npmtt.ticketclient.view.vetau.TKVeTauPanel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -278,6 +282,9 @@ public class MainController {
     private class QLVeTauListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            QLVeTauPanel panel = new QLVeTauPanel();
+            mainFrame.showPanel(panel);
+            new QLVeTauController(panel);
 
         }
     }
@@ -285,6 +292,9 @@ public class MainController {
     private class TKVeTauListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            TKVeTauPanel panel = new TKVeTauPanel();
+            mainFrame.showPanel(panel);
+            new TKVeTauController(panel);
 
         }
     }

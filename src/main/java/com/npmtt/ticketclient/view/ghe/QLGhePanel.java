@@ -148,7 +148,7 @@ public class QLGhePanel extends BasePanel {
         fieldSoGhe.setText("");
         fieldSoGhe.setBackground(Color.white);
 
-        ComboBoxIDToaTau.setSelectedIndex(-1);
+        ComboBoxIDToaTau.setSelectedIndex(0);
         buttonThem.setEnabled(true);
         buttonSua.setEnabled(false);
         buttonXoa.setEnabled(false);

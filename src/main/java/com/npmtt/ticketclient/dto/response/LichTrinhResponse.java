@@ -11,4 +11,9 @@ public class LichTrinhResponse {
     private String ngayDi;
     private String ngayDen;
     private String trangThai;
+
+    @Override
+    public String toString() {
+        return maLichTrinh;
+    }
 }
