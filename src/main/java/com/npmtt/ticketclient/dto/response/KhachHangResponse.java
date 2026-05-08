@@ -11,4 +11,9 @@ public class KhachHangResponse {
     private String gioiTinh;
     private String sdt;
     private String diaChi;
+
+    @Override
+    public String toString() {
+        return hoTen;
+    }
 }
