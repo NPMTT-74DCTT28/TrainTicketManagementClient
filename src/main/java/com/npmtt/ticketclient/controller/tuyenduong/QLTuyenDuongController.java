@@ -19,7 +19,7 @@ public class QLTuyenDuongController {
     private final QLTuyenDuongPanel panel;
     private final TuyenDuongApiclient dao;
     private final DefaultTableModel model;
-    private HashMap<Integer, String> mapGaTau = new HashMap<>();
+    private final HashMap<Integer, String> mapGaTau = new HashMap<>();
     private int selectedRow;
 
     public QLTuyenDuongController(QLTuyenDuongPanel panel) {
@@ -88,7 +88,7 @@ public class QLTuyenDuongController {
                     panel.showError("Ga đi và Ga đến không được trùng nhau!");
                     return;
                 }
-                if (dao.createTuyenDuong(td)!=null) {
+                if (dao.createTuyenDuong(td) != null) {
                     panel.showMessage("Thêm tuyến đường thành công!");
                     panel.resetForm();
                     refresh();
@@ -123,7 +123,7 @@ public class QLTuyenDuongController {
                     return;
                 }
                 if (panel.showConfirm("Bạn có muốn cập nhật thông tin của" + td.getMaTuyen() + " không ?")) {
-                    if (dao.updateTuyenDuong(td)!=null) {
+                    if (dao.updateTuyenDuong(td) != null) {
                         panel.showMessage("Cập nhật thành công!");
                         refresh();
                     } else {
@@ -144,7 +144,7 @@ public class QLTuyenDuongController {
         public void actionPerformed(ActionEvent e) {
             try {
                 int id = Integer.parseInt(model.getValueAt(selectedRow, 0).toString());
-                if (id<1) {
+                if (id < 1) {
                     return;
                 }
 
@@ -179,7 +179,7 @@ public class QLTuyenDuongController {
             if (selectedRow == -1) {
                 return;
             }
-            try{
+            try {
                 Object value = model.getValueAt(selectedRow, 0);
                 if (value == null) {
                     return;
@@ -199,9 +199,9 @@ public class QLTuyenDuongController {
                 panel.setGaden(selectedTD.getIdGaDen());
                 panel.setKhoangcach(model.getValueAt(selectedRow, 5).toString());
                 panel.setGiaCB(model.getValueAt(selectedRow, 6).toString());
-            }catch (Exception ex){
+            } catch (Exception ex) {
                 ex.printStackTrace();
-            };
+            }
 
         }
 

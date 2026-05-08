@@ -2,12 +2,18 @@ package com.npmtt.ticketclient.controller.core;
 
 import com.npmtt.ticketclient.controller.gatau.QLGaTauController;
 import com.npmtt.ticketclient.controller.gatau.TKGaTauController;
+import com.npmtt.ticketclient.controller.ghe.QLGheController;
+import com.npmtt.ticketclient.controller.ghe.TKGheController;
 import com.npmtt.ticketclient.controller.khachhang.QLKhachHangController;
 import com.npmtt.ticketclient.controller.khachhang.TKKhachHangController;
 import com.npmtt.ticketclient.controller.lichtrinh.QLLichTrinhController;
 import com.npmtt.ticketclient.controller.lichtrinh.TKLichTrinhController;
+import com.npmtt.ticketclient.controller.loaitoa.QLLoaiToaController;
+import com.npmtt.ticketclient.controller.loaitoa.TKLoaiToaController;
 import com.npmtt.ticketclient.controller.nhanvien.QLNhanVienController;
 import com.npmtt.ticketclient.controller.nhanvien.TKNhanVienController;
+import com.npmtt.ticketclient.controller.tau.QLTauController;
+import com.npmtt.ticketclient.controller.tau.TKTauController;
 import com.npmtt.ticketclient.controller.thongke.*;
 import com.npmtt.ticketclient.controller.toatau.QLToaTauController;
 import com.npmtt.ticketclient.controller.toatau.TKToaTauController;
@@ -19,12 +25,18 @@ import com.npmtt.ticketclient.view.core.Dashboard;
 import com.npmtt.ticketclient.view.core.MainFrame;
 import com.npmtt.ticketclient.view.gatau.QLGaTauPanel;
 import com.npmtt.ticketclient.view.gatau.TKGaTauPanel;
+import com.npmtt.ticketclient.view.ghe.QLGhePanel;
+import com.npmtt.ticketclient.view.ghe.TKGhePanel;
 import com.npmtt.ticketclient.view.khachhang.QLKhachHangPanel;
 import com.npmtt.ticketclient.view.khachhang.TKKhachHangPanel;
 import com.npmtt.ticketclient.view.lichtrinh.QLLichTrinhPanel;
 import com.npmtt.ticketclient.view.lichtrinh.TKLichTrinhPanel;
+import com.npmtt.ticketclient.view.loaitoa.QLLoaiToaPanel;
+import com.npmtt.ticketclient.view.loaitoa.TKLoaiToaPanel;
 import com.npmtt.ticketclient.view.nhanvien.QLNhanVienPanel;
 import com.npmtt.ticketclient.view.nhanvien.TKNhanVienPanel;
+import com.npmtt.ticketclient.view.tau.QLTauPanel;
+import com.npmtt.ticketclient.view.tau.TKTauPanel;
 import com.npmtt.ticketclient.view.thongke.*;
 import com.npmtt.ticketclient.view.toatau.QLToaTauPanel;
 import com.npmtt.ticketclient.view.toatau.TKToaTauPanel;
@@ -122,28 +134,36 @@ public class MainController {
     private class QLTauListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            QLTauPanel panel = new QLTauPanel();
+            mainFrame.showPanel(panel);
+            new QLTauController(panel);
         }
     }
 
     private class TKTauListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            TKTauPanel panel = new TKTauPanel();
+            mainFrame.showPanel(panel);
+            new TKTauController(panel);
         }
     }
 
     private class QLLoaiToaListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            QLLoaiToaPanel panel = new QLLoaiToaPanel();
+            mainFrame.showPanel(panel);
+            new QLLoaiToaController(panel);
         }
     }
 
     private class TKLoaiToaListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            TKLoaiToaPanel panel = new TKLoaiToaPanel();
+            mainFrame.showPanel(panel);
+            new TKLoaiToaController(panel);
         }
     }
 
@@ -168,14 +188,18 @@ public class MainController {
     private class QLGheListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            QLGhePanel panel = new QLGhePanel();
+            mainFrame.showPanel(panel);
+            new QLGheController(panel);
         }
     }
 
     private class TKGheListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            TKGhePanel panel = new TKGhePanel();
+            mainFrame.showPanel(panel);
+            new TKGheController(panel);
         }
     }
 
@@ -239,8 +263,6 @@ public class MainController {
             QLKhachHangPanel panel = new QLKhachHangPanel();
             mainFrame.showPanel(panel);
             new QLKhachHangController(panel);
-
-
         }
     }
 
@@ -250,7 +272,6 @@ public class MainController {
             TKKhachHangPanel panel = new TKKhachHangPanel();
             mainFrame.showPanel(panel);
             new TKKhachHangController(panel);
-
         }
     }
 

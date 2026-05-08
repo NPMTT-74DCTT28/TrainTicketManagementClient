@@ -23,8 +23,8 @@ public class TKToaTauController {
     private final LoaiToaApiClient loaiToaApiClient;
     private final DefaultTableModel tableModel;
 
-    private Map<Integer, String> mapTau = new HashMap<>();
-    private Map<Integer, String> mapLoaiToa = new HashMap<>();
+    private final Map<Integer, String> mapTau = new HashMap<>();
+    private final Map<Integer, String> mapLoaiToa = new HashMap<>();
 
     public TKToaTauController(TKToaTauPanel panel) {
         this.panel = panel;
@@ -90,12 +90,12 @@ public class TKToaTauController {
         tableModel.fireTableDataChanged();
     }
 
-    private static class ComboItem {
-        private final int id;
-        private final String label;
-        public ComboItem(int id, String label) { this.id = id; this.label = label; }
-        public int getId() { return id; }
-        @Override public String toString() { return label; }
+    private record ComboItem(int id, String label) {
+
+        @Override
+        public String toString() {
+            return label;
+        }
     }
 
     private class TimKiemListener implements ActionListener {
@@ -108,7 +108,7 @@ public class TKToaTauController {
                 Object selectedTau = panel.getBoxTau().getSelectedItem();
                 int idTau = 0;
                 if (selectedTau instanceof ComboItem) {
-                    idTau = ((ComboItem) selectedTau).getId();
+                    idTau = ((ComboItem) selectedTau).id();
                 }
                 final int finalIdTau = idTau; // tạo biến final để dùng trong lambda
 
@@ -116,7 +116,7 @@ public class TKToaTauController {
                 Object selectedLoai = panel.getBoxLoaiToa().getSelectedItem();
                 int idLoaiToa = 0;
                 if (selectedLoai instanceof ComboItem) {
-                    idLoaiToa = ((ComboItem) selectedLoai).getId();
+                    idLoaiToa = ((ComboItem) selectedLoai).id();
                 }
                 final int finalIdLoaiToa = idLoaiToa; // tạo biến final để dùng trong lambda
 

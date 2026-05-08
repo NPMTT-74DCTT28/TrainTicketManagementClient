@@ -45,6 +45,7 @@ public class GaTauApiClient {
             throw new Exception(errorResponse.getMessage());
         }
     }
+
     public GaTauDTO createGaTau(GaTauDTO dto) throws Exception {
         if (dto == null) return null;
         String jsonBody = gson.toJson(dto);
@@ -67,6 +68,7 @@ public class GaTauApiClient {
             throw new Exception(errorResponse.getMessage());
         }
     }
+
     public GaTauDTO updateGaTau(GaTauDTO dto) throws Exception {
         if (dto == null) return null;
         String jsonBody = gson.toJson(dto);
@@ -90,6 +92,7 @@ public class GaTauApiClient {
             throw new Exception(errorResponse.getMessage());
         }
     }
+
     public boolean deleteGaTau(Integer id) throws Exception {
         if (id < 1) return false;
         HttpRequest request = HttpRequest.newBuilder()
@@ -107,6 +110,7 @@ public class GaTauApiClient {
             throw new Exception(errorResponse.getMessage());
         }
     }
+
     public List<GaTauDTO> searchGaTau(String keyword) throws Exception {
         String url = API_URL + "/search?key=" + URLEncoder.encode(keyword, StandardCharsets.UTF_8);
         HttpRequest request = HttpRequest.newBuilder()
@@ -120,7 +124,7 @@ public class GaTauApiClient {
             }.getType();
             ApiResponse<List<GaTauDTO>> apiResponse = gson.fromJson(response.body(), responseType);
             return apiResponse.getData();
-        }else{
+        } else {
             Type responeType = new TypeToken<ApiResponse<GaTauDTO>>() {
             }.getType();
             ApiResponse<Object> errorResponse = gson.fromJson(response.body(), responeType);

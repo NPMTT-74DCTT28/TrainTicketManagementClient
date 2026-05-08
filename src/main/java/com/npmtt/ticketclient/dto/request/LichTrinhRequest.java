@@ -2,9 +2,6 @@ package com.npmtt.ticketclient.dto.request;
 
 import lombok.*;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 @Getter
 @Setter
 @AllArgsConstructor
@@ -19,7 +16,7 @@ public class LichTrinhRequest {
     private String ngayDen;
     private String trangThai;
 
-    public LichTrinhRequest(String maLichTrinh, Integer idTau, Integer idTuyenDuong,String ngayDi,String ngayDen, String trangThai) {
+    public LichTrinhRequest(String maLichTrinh, Integer idTau, Integer idTuyenDuong, String ngayDi, String ngayDen, String trangThai) {
         this.maLichTrinh = maLichTrinh;
         this.idTau = idTau;
         this.idTuyenDuong = idTuyenDuong;

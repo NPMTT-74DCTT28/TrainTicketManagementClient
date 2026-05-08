@@ -5,7 +5,6 @@ import com.npmtt.ticketclient.apiclient.ToaTauApiClient;
 import com.npmtt.ticketclient.dto.request.GheRequest;
 import com.npmtt.ticketclient.dto.response.GheResponse;
 import com.npmtt.ticketclient.dto.response.ToaTauResponse;
-import com.npmtt.ticketclient.dto.response.TuyenDuongResponse;
 import com.npmtt.ticketclient.view.ghe.QLGhePanel;
 
 import javax.swing.table.DefaultTableModel;
@@ -21,7 +20,7 @@ public class QLGheController {
     private final GheApiClient apiClient;
     private final DefaultTableModel model;
     private int selectedRow;
-    private HashMap<Integer, String> MapToaTau;
+    private final HashMap<Integer, String> MapToaTau;
 
 
     public QLGheController(QLGhePanel panel) {

@@ -94,7 +94,9 @@ public class TKLoaiToaPanel extends BasePanel {
         return fieldTuKhoa.getText().trim();
     }
 
-    public String getHeSoGia(){return fieldTuKhoa.getText().trim();}
+    public String getHeSoGia() {
+        return fieldTuKhoa.getText().trim();
+    }
 
     public void resetForm() {
         fieldTuKhoa.setText("");

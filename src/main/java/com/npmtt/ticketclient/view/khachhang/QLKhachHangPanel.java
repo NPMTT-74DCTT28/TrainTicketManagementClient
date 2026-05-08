@@ -1,7 +1,6 @@
 package com.npmtt.ticketclient.view.khachhang;
 
 import com.npmtt.ticketclient.dto.request.KhachHangRequest;
-import com.npmtt.ticketclient.dto.request.NhanVienRequest;
 import com.npmtt.ticketclient.enums.GioiTinh;
 import com.npmtt.ticketclient.util.DinhDang;
 import com.npmtt.ticketclient.view.BasePanel;

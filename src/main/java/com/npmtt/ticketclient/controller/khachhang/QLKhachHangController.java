@@ -1,7 +1,6 @@
 package com.npmtt.ticketclient.controller.khachhang;
 
 import com.npmtt.ticketclient.apiclient.KhachHangApiClient;
-import com.npmtt.ticketclient.controller.nhanvien.QLNhanVienController;
 import com.npmtt.ticketclient.dto.request.KhachHangRequest;
 import com.npmtt.ticketclient.dto.response.KhachHangResponse;
 import com.npmtt.ticketclient.view.khachhang.QLKhachHangPanel;
@@ -71,14 +70,14 @@ public class QLKhachHangController {
                 if (panel.thongBaoLoiDauVao() != null) {
                     panel.showWarning(panel.thongBaoLoiDauVao());
                     return;
-                    }
+                }
 
                 KhachHangRequest newKhachHang = panel.getKhachHangFromForm();
                 newKhachHang.setId(-1);
                 KhachHangResponse ketQua = apiClient.createKhachHang(newKhachHang);
                 panel.showMessage("Thêm khách hàng " + ketQua.getHoTen() + " thành công!");
                 refresh();
-                }catch (Exception ex) {
+            } catch (Exception ex) {
                 ex.printStackTrace();
                 panel.showError(ex.getMessage());
                 refresh();
@@ -101,7 +100,7 @@ public class QLKhachHangController {
                 KhachHangResponse ketQua = apiClient.updateKhachHang(edited);
                 panel.showMessage("Cập nhật khách hàng " + ketQua.getHoTen() + " thành công!");
                 refresh();
-            }catch (Exception ex) {
+            } catch (Exception ex) {
                 ex.printStackTrace();
                 panel.showError(ex.getMessage());
                 refresh();
@@ -117,11 +116,11 @@ public class QLKhachHangController {
                 int id = Integer.parseInt(tableModel.getValueAt(selectedRow, 0).toString());
                 if (apiClient.deleteKhachHang(id)) {
                     panel.showMessage("Xóa khách hàng thành công!");
-                }else {
+                } else {
                     panel.showError("Xóa khách hàng thất bại");
                 }
                 refresh();
-            }catch (Exception ex) {
+            } catch (Exception ex) {
                 ex.printStackTrace();
                 panel.showError(ex.getMessage());
                 refresh();
@@ -163,7 +162,7 @@ public class QLKhachHangController {
 
             try {
                 panel.setNgaySinh(LocalDate.parse(ngaySinh));
-            }catch (Exception ex) {
+            } catch (Exception ex) {
                 ex.printStackTrace();
                 panel.showError("Lỗi khi chuyển đổi ngày tháng: " + ex.getMessage());
             }

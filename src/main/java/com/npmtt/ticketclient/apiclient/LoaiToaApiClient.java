@@ -10,7 +10,6 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.lang.reflect.Type;
-import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URLEncoder;
 import java.net.http.HttpClient;
@@ -36,7 +35,8 @@ public class LoaiToaApiClient {
 
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         if (response.statusCode() == 200) {
-            Type responseType = new TypeToken<ApiResponse<List<LoaiToaDTO>>>() {}.getType();
+            Type responseType = new TypeToken<ApiResponse<List<LoaiToaDTO>>>() {
+            }.getType();
             ApiResponse<List<LoaiToaDTO>> apiResponse = gson.fromJson(response.body(), responseType);
             return apiResponse.getData();
         } else {
@@ -56,7 +56,8 @@ public class LoaiToaApiClient {
 
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         if (response.statusCode() == 200 || response.statusCode() == 201) {
-            Type responseType = new TypeToken<ApiResponse<LoaiToaDTO>>() {}.getType();
+            Type responseType = new TypeToken<ApiResponse<LoaiToaDTO>>() {
+            }.getType();
             ApiResponse<LoaiToaDTO> apiResponse = gson.fromJson(response.body(), responseType);
             return apiResponse.getData();
         } else {
@@ -76,7 +77,8 @@ public class LoaiToaApiClient {
 
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         if (response.statusCode() == 200) {
-            Type responseType = new TypeToken<ApiResponse<LoaiToaDTO>>() {}.getType();
+            Type responseType = new TypeToken<ApiResponse<LoaiToaDTO>>() {
+            }.getType();
             ApiResponse<LoaiToaDTO> apiResponse = gson.fromJson(response.body(), responseType);
             return apiResponse.getData();
         } else {
@@ -122,7 +124,8 @@ public class LoaiToaApiClient {
 
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         if (response.statusCode() == 200) {
-            Type responseType = new TypeToken<ApiResponse<List<LoaiToaDTO>>>() {}.getType();
+            Type responseType = new TypeToken<ApiResponse<List<LoaiToaDTO>>>() {
+            }.getType();
             ApiResponse<List<LoaiToaDTO>> apiResponse = gson.fromJson(response.body(), responseType);
             return apiResponse.getData();
         } else {
@@ -132,7 +135,8 @@ public class LoaiToaApiClient {
     }
 
     private void handleErrorResponse(HttpResponse<String> response) throws Exception {
-        Type responseType = new TypeToken<ApiResponse<Object>>() {}.getType();
+        Type responseType = new TypeToken<ApiResponse<Object>>() {
+        }.getType();
         ApiResponse<Object> errorResponse = gson.fromJson(response.body(), responseType);
         String message = (errorResponse != null && errorResponse.getMessage() != null)
                 ? errorResponse.getMessage()

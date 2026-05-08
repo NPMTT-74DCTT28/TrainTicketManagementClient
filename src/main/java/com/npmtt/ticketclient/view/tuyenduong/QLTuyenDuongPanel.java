@@ -122,7 +122,7 @@ public final class QLTuyenDuongPanel extends BasePanel {
 
     public void setGadi(int idgadi) {
         for (int i = 0; i < cboGadi.getItemCount(); i++) {
-            GaTauDTO ga = (GaTauDTO) cboGadi.getItemAt(i);
+            GaTauDTO ga = cboGadi.getItemAt(i);
             if (ga.getId() == idgadi) {
                 cboGadi.setSelectedIndex(i);
                 break;
@@ -132,7 +132,7 @@ public final class QLTuyenDuongPanel extends BasePanel {
 
     public void setGaden(int idgaden) {
         for (int i = 0; i < cboGaden.getItemCount(); i++) {
-            GaTauDTO ga = (GaTauDTO) cboGaden.getItemAt(i);
+            GaTauDTO ga = cboGaden.getItemAt(i);
             if (ga.getId() == idgaden) {
                 cboGaden.setSelectedIndex(i);
                 break;

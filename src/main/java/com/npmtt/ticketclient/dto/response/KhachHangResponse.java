@@ -1,6 +1,7 @@
 package com.npmtt.ticketclient.dto.response;
 
 import lombok.Data;
+
 @Data
 public class KhachHangResponse {
     private int id;

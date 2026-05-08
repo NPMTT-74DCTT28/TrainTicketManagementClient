@@ -1,7 +1,7 @@
 package com.npmtt.ticketclient.view.lichtrinh;
 
 
-
+import com.npmtt.ticketclient.enums.TrangThaiLichTrinh;
 import com.npmtt.ticketclient.view.BasePanel;
 
 import javax.swing.*;
@@ -14,7 +14,6 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import com.npmtt.ticketclient.enums.TrangThaiLichTrinh;
 
 public class TKLichTrinhPanel extends BasePanel {
 

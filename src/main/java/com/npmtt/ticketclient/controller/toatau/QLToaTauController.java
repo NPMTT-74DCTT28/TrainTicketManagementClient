@@ -28,8 +28,8 @@ public class QLToaTauController {
     private final DefaultTableModel model;
 
     private List<ToaTauResponse> listToaTau;
-    private Map<Integer, String> mapTau = new HashMap<>();
-    private Map<Integer, String> mapLoaiToa = new HashMap<>();
+    private final Map<Integer, String> mapTau = new HashMap<>();
+    private final Map<Integer, String> mapLoaiToa = new HashMap<>();
     private int selectedRow = -1;
 
     public QLToaTauController(QLToaTauPanel panel) {
@@ -99,19 +99,12 @@ public class QLToaTauController {
     }
 
     // Lớp helper cho JComboBox
-    private static class ComboItem {
-        private final int id;
-        private final String label;
-
-        public ComboItem(int id, String label) {
-            this.id = id;
-            this.label = label;
-        }
-
-        public int getId() { return id; }
+    private record ComboItem(int id, String label) {
 
         @Override
-        public String toString() { return label; }
+        public String toString() {
+            return label;
+        }
     }
 
     private class ThemListener implements ActionListener {
@@ -130,7 +123,7 @@ public class QLToaTauController {
                     return;
                 }
 
-                ToaTauRequest request = new ToaTauRequest(maToa, selectedTau.getId(), selectedLoai.getId());
+                ToaTauRequest request = new ToaTauRequest(maToa, selectedTau.id(), selectedLoai.id());
                 ToaTauResponse response = toaTauApiClient.createToaTau(request);
                 if (response != null) {
                     panel.showMessage("Thêm toa tàu thành công!");
@@ -169,8 +162,8 @@ public class QLToaTauController {
                 ToaTauRequest request = ToaTauRequest.builder()
                         .id(idToa)
                         .maToa(maToa)
-                        .idTau(selectedTau.getId())
-                        .idLoaiToa(selectedLoai.getId())
+                        .idTau(selectedTau.id())
+                        .idLoaiToa(selectedLoai.id())
                         .build();
 
                 if (panel.showConfirm("Cập nhật toa " + maToa + "?")) {
@@ -246,7 +239,7 @@ public class QLToaTauController {
             JComboBox boxTau = panel.getBoxTau();
             for (int i = 0; i < boxTau.getItemCount(); i++) {
                 ComboItem item = (ComboItem) boxTau.getItemAt(i);
-                if (item.getId() == selected.getIdTau()) {
+                if (item.id() == selected.getIdTau()) {
                     boxTau.setSelectedIndex(i);
                     break;
                 }
@@ -256,16 +249,27 @@ public class QLToaTauController {
             JComboBox boxLoai = panel.getBoxLoaiToa();
             for (int i = 0; i < boxLoai.getItemCount(); i++) {
                 ComboItem item = (ComboItem) boxLoai.getItemAt(i);
-                if (item.getId() == selected.getIdLoaiToa()) {
+                if (item.id() == selected.getIdLoaiToa()) {
                     boxLoai.setSelectedIndex(i);
                     break;
                 }
             }
         }
 
-        @Override public void mousePressed(MouseEvent e) {}
-        @Override public void mouseReleased(MouseEvent e) {}
-        @Override public void mouseEntered(MouseEvent e) {}
-        @Override public void mouseExited(MouseEvent e) {}
+        @Override
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+        }
     }
 }

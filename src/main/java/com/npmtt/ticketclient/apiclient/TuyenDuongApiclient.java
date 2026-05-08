@@ -37,12 +37,14 @@ public class TuyenDuongApiclient {
             }.getType();
             ApiResponse<List<TuyenDuongResponse>> apiResponse = gson.fromJson(response.body(), responseType);
             return apiResponse.getData();
-        }else{
-            Type responeType = new TypeToken<ApiResponse<TuyenDuongResponse>>(){}.getType();
+        } else {
+            Type responeType = new TypeToken<ApiResponse<TuyenDuongResponse>>() {
+            }.getType();
             ApiResponse<Object> errorResponse = gson.fromJson(response.body(), responeType);
             throw new Exception(errorResponse.getMessage());
         }
     }
+
     public TuyenDuongResponse createTuyenDuong(TuyenDuongRequest requestDTO) throws Exception {
         if (requestDTO == null) return null;
         String jsonBody = gson.toJson(requestDTO);
@@ -58,12 +60,14 @@ public class TuyenDuongApiclient {
             }.getType();
             ApiResponse<TuyenDuongResponse> apiResponse = gson.fromJson(response.body(), responseType);
             return apiResponse.getData();
-        }else{
-            Type responeType = new TypeToken<ApiResponse<TuyenDuongResponse>>(){}.getType();
+        } else {
+            Type responeType = new TypeToken<ApiResponse<TuyenDuongResponse>>() {
+            }.getType();
             ApiResponse<Object> errorResponse = gson.fromJson(response.body(), responeType);
             throw new Exception(errorResponse.getMessage());
         }
     }
+
     public TuyenDuongResponse updateTuyenDuong(TuyenDuongRequest requestDTO) throws Exception {
         if (requestDTO == null) return null;
         String jsonBody = gson.toJson(requestDTO);
@@ -79,12 +83,14 @@ public class TuyenDuongApiclient {
             }.getType();
             ApiResponse<TuyenDuongResponse> apiResponse = gson.fromJson(response.body(), responseType);
             return apiResponse.getData();
-        }else{
-            Type responeType = new TypeToken<ApiResponse<TuyenDuongResponse>>(){}.getType();
+        } else {
+            Type responeType = new TypeToken<ApiResponse<TuyenDuongResponse>>() {
+            }.getType();
             ApiResponse<Object> errorResponse = gson.fromJson(response.body(), responeType);
             throw new Exception(errorResponse.getMessage());
         }
     }
+
     public boolean deleteTuyenDuong(int id) throws Exception {
         if (id < 1) return false;
         HttpRequest request = HttpRequest.newBuilder()
@@ -95,12 +101,14 @@ public class TuyenDuongApiclient {
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         if (response.statusCode() == 200) {
             return true;
-        }else {
-            Type responeType = new TypeToken<ApiResponse<TuyenDuongResponse>>(){}.getType();
+        } else {
+            Type responeType = new TypeToken<ApiResponse<TuyenDuongResponse>>() {
+            }.getType();
             ApiResponse<Object> errorResponse = gson.fromJson(response.body(), responeType);
             throw new Exception(errorResponse.getMessage());
         }
     }
+
     public List<TuyenDuongResponse> searchTuyenDuong(String keyword) throws Exception {
         String url = API_URL + "/search?key=" + keyword;
         HttpRequest request = HttpRequest.newBuilder()
@@ -114,8 +122,9 @@ public class TuyenDuongApiclient {
             }.getType();
             ApiResponse<List<TuyenDuongResponse>> apiResponse = gson.fromJson(response.body(), responseType);
             return apiResponse.getData();
-        }else{
-            Type responeType = new TypeToken<ApiResponse<TuyenDuongResponse>>(){}.getType();
+        } else {
+            Type responeType = new TypeToken<ApiResponse<TuyenDuongResponse>>() {
+            }.getType();
             ApiResponse<Object> errorResponse = gson.fromJson(response.body(), responeType);
             throw new Exception(errorResponse.getMessage());
         }
