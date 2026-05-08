@@ -1,7 +1,6 @@
 package com.npmtt.ticketclient.dto.response;
 
 import lombok.Data;
-import java.time.LocalDateTime;
 
 @Data
 public class LichTrinhResponse {

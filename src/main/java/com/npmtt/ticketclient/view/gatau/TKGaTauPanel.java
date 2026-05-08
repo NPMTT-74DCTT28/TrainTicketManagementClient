@@ -21,6 +21,7 @@ public class TKGaTauPanel extends BasePanel {
     private JButton btnTimkiem, btnReset;
     @Getter
     private JTable table;
+
     public TKGaTauPanel() {
         initComponents();
     }
@@ -51,7 +52,7 @@ public class TKGaTauPanel extends BasePanel {
         panelTop.add(panelFrom);
         panelTop.add(createButtonField(btn, Color.WHITE), BorderLayout.SOUTH);
 
-        String[] columNames = {"id","Mã Ga", "Tên Ga", "Địa chỉ", "Thành phố"};
+        String[] columNames = {"id", "Mã Ga", "Tên Ga", "Địa chỉ", "Thành phố"};
         model = new DefaultTableModel(columNames, 0);
         table = new JTable(model);
         TableColumnModel columnModel = table.getColumnModel();

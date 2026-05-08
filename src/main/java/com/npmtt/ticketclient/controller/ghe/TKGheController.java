@@ -13,7 +13,7 @@ public class TKGheController {
 
     private final TKGhePanel panel;
     private final GheApiClient apiClient;
-    private DefaultTableModel tableModel;
+    private final DefaultTableModel tableModel;
 
     public TKGheController(TKGhePanel panel) {
         this.panel = panel;
@@ -44,7 +44,7 @@ public class TKGheController {
             tableModel.fireTableDataChanged();
         } catch (Exception e) {
             e.printStackTrace();
-            panel.showError( e.getMessage());
+            panel.showError(e.getMessage());
         }
     }
 
@@ -65,7 +65,7 @@ public class TKGheController {
                 }
 
                 tableModel.fireTableDataChanged();
-            }catch (Exception ex) {
+            } catch (Exception ex) {
                 ex.printStackTrace();
                 panel.showError(ex.getMessage());
             }

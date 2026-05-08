@@ -113,7 +113,7 @@ public class QLLoaiToaController {
                 }
 
                 if (panel.showConfirm("Bạn có chắc muốn sửa loại toa: " + loaiToa.getTenLoai() + "?")) {
-                    if (dao.updateLoaiToa(loaiToa)!= null) {
+                    if (dao.updateLoaiToa(loaiToa) != null) {
                         panel.showMessage("Sửa thành công!");
                         refresh();
                     } else {
@@ -133,7 +133,7 @@ public class QLLoaiToaController {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                int id = Integer.parseInt(model.getValueAt(selectedRow,0).toString());
+                int id = Integer.parseInt(model.getValueAt(selectedRow, 0).toString());
 
                 if (id < 1) {
                     panel.showWarning("Tên loại toa không hợp lệ!");

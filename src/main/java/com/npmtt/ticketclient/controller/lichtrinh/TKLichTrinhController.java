@@ -1,7 +1,6 @@
 package com.npmtt.ticketclient.controller.lichtrinh;
 
 
-
 import com.npmtt.ticketclient.apiclient.LichTrinhApiClient;
 import com.npmtt.ticketclient.apiclient.TauApiClient;
 import com.npmtt.ticketclient.apiclient.TuyenDuongApiclient;
@@ -88,8 +87,8 @@ public class TKLichTrinhController {
                     lt.getMaLichTrinh(),
                     tenTau,
                     tenTuyen,
-                    (lt.getNgayDi() != null) ? lt.getNgayDi(): "",
-                    (lt.getNgayDen() != null) ?lt.getNgayDen() : "",
+                    (lt.getNgayDi() != null) ? lt.getNgayDi() : "",
+                    (lt.getNgayDen() != null) ? lt.getNgayDen() : "",
                     lt.getTrangThai()
             });
         }

@@ -35,7 +35,7 @@ public class KhachHangApiClient {
             }.getType();
             ApiResponse<List<KhachHangResponse>> apiResponse = gson.fromJson(response.body(), responseType);
             return apiResponse.getData();
-        }else {
+        } else {
             Type responseType = new TypeToken<ApiResponse<Object>>() {
 
             }.getType();
@@ -52,7 +52,7 @@ public class KhachHangApiClient {
             }.getType();
             ApiResponse<KhachHangResponse> apiResponse = gson.fromJson(response.body(), responseType);
             return apiResponse.getData();
-        }else {
+        } else {
             Type responseType = new TypeToken<ApiResponse<Object>>() {
 
             }.getType();
@@ -61,7 +61,7 @@ public class KhachHangApiClient {
         }
     }
 
-    public List<KhachHangResponse> getAllKhachHang() throws Exception{
+    public List<KhachHangResponse> getAllKhachHang() throws Exception {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(API_URL))
                 .header("Authorization", "Bearer " + SessionManager.getCurrentUser().getToken())

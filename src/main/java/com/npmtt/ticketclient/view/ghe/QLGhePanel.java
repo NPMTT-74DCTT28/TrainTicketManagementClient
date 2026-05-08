@@ -1,9 +1,6 @@
 package com.npmtt.ticketclient.view.ghe;
 
-import com.npmtt.ticketclient.dto.gatau.GaTauDTO;
-import com.npmtt.ticketclient.dto.loaitoa.LoaiToaDTO;
 import com.npmtt.ticketclient.dto.request.GheRequest;
-import com.npmtt.ticketclient.dto.request.ToaTauRequest;
 import com.npmtt.ticketclient.dto.response.ToaTauResponse;
 import com.npmtt.ticketclient.view.BasePanel;
 
@@ -26,7 +23,7 @@ public class QLGhePanel extends BasePanel {
     private JButton buttonXoa;
     private JButton buttonReset;
     private JTable tblGhe;
-    private boolean isEditMode = false;
+    private final boolean isEditMode = false;
 
     public QLGhePanel() {
         initComponents();

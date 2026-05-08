@@ -33,7 +33,8 @@ public class ToaTauApiClient {
                 .build();
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         if (response.statusCode() == 200) {
-            Type responseType = new TypeToken<ApiResponse<List<ToaTauResponse>>>(){}.getType();
+            Type responseType = new TypeToken<ApiResponse<List<ToaTauResponse>>>() {
+            }.getType();
             ApiResponse<List<ToaTauResponse>> apiResponse = gson.fromJson(response.body(), responseType);
             return apiResponse.getData();
         } else {
@@ -55,7 +56,8 @@ public class ToaTauApiClient {
                 .build();
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         if (response.statusCode() == 201) {
-            Type responseType = new TypeToken<ApiResponse<ToaTauResponse>>(){}.getType();
+            Type responseType = new TypeToken<ApiResponse<ToaTauResponse>>() {
+            }.getType();
             ApiResponse<ToaTauResponse> apiResponse = gson.fromJson(response.body(), responseType);
             return apiResponse.getData();
         } else {
@@ -77,7 +79,8 @@ public class ToaTauApiClient {
                 .build();
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         if (response.statusCode() == 200) {
-            Type responseType = new TypeToken<ApiResponse<ToaTauResponse>>(){}.getType();
+            Type responseType = new TypeToken<ApiResponse<ToaTauResponse>>() {
+            }.getType();
             ApiResponse<ToaTauResponse> apiResponse = gson.fromJson(response.body(), responseType);
             return apiResponse.getData();
         } else {
@@ -115,7 +118,8 @@ public class ToaTauApiClient {
                 .build();
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         if (response.statusCode() == 200) {
-            Type responseType = new TypeToken<ApiResponse<List<ToaTauResponse>>>(){}.getType();
+            Type responseType = new TypeToken<ApiResponse<List<ToaTauResponse>>>() {
+            }.getType();
             ApiResponse<List<ToaTauResponse>> apiResponse = gson.fromJson(response.body(), responseType);
             return apiResponse.getData();
         } else {

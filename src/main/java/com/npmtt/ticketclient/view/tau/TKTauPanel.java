@@ -15,8 +15,6 @@ import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-import static javax.swing.text.StyleConstants.setBackground;
-
 public class TKTauPanel extends BasePanel {
     private JTextField fieldTuKhoa;
     private DefaultTableModel model;

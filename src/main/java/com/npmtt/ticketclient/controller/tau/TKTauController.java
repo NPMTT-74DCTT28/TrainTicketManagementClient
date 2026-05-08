@@ -13,7 +13,7 @@ public class TKTauController {
 
     private final TKTauPanel panel;
     private final TauApiClient dao;
-    private DefaultTableModel tableModel;
+    private final DefaultTableModel tableModel;
 
     public TKTauController(TKTauPanel panel) {
         this.panel = panel;

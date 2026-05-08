@@ -1,7 +1,6 @@
 package com.npmtt.ticketclient.controller.khachhang;
 
 import com.npmtt.ticketclient.apiclient.KhachHangApiClient;
-import com.npmtt.ticketclient.controller.nhanvien.TKNhanVienController;
 import com.npmtt.ticketclient.dto.response.KhachHangResponse;
 import com.npmtt.ticketclient.view.khachhang.TKKhachHangPanel;
 
@@ -44,7 +43,7 @@ public class TKKhachHangController {
                 });
             }
             tableModel.fireTableDataChanged();
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             panel.showError(e.getMessage());
         }
@@ -70,7 +69,7 @@ public class TKKhachHangController {
                     });
                 }
                 tableModel.fireTableDataChanged();
-            }catch (Exception ex) {
+            } catch (Exception ex) {
                 ex.printStackTrace();
                 panel.showError(ex.getMessage());
             }

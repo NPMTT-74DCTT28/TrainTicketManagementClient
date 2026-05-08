@@ -16,6 +16,7 @@ public class GaTauDTO {
         this.diaChi = diachi;
         this.thanhPho = thanhpho;
     }
+
     public String toString() {
         return tenGa;
     }

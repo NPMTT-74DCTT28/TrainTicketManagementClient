@@ -20,5 +20,8 @@ public class KhachHangDTO {
         this.sdt = sdt;
         this.diaChi = diaChi;
     }
-    public String toString() {return hoTen;}
+
+    public String toString() {
+        return hoTen;
+    }
 }

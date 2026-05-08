@@ -1,7 +1,6 @@
 package com.npmtt.ticketclient.view.khachhang;
 
 import com.npmtt.ticketclient.enums.GioiTinh;
-import com.npmtt.ticketclient.enums.VaiTro;
 import com.npmtt.ticketclient.view.BasePanel;
 
 import javax.swing.*;

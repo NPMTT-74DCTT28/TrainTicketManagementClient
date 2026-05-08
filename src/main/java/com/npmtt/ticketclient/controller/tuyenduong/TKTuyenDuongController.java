@@ -4,7 +4,6 @@ package com.npmtt.ticketclient.controller.tuyenduong;
 import com.npmtt.ticketclient.apiclient.GaTauApiClient;
 import com.npmtt.ticketclient.apiclient.TuyenDuongApiclient;
 import com.npmtt.ticketclient.dto.gatau.GaTauDTO;
-import com.npmtt.ticketclient.dto.request.TuyenDuongRequest;
 import com.npmtt.ticketclient.dto.response.TuyenDuongResponse;
 import com.npmtt.ticketclient.view.tuyenduong.TKTuyenDuongPanel;
 
@@ -40,7 +39,7 @@ public class TKTuyenDuongController {
                         gaTau.getMaGa() + " - " + gaTau.getTenGa()
                 );
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

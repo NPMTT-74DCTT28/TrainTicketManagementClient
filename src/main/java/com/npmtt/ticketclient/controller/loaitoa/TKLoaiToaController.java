@@ -7,14 +7,13 @@ import com.npmtt.ticketclient.view.loaitoa.TKLoaiToaPanel;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.math.BigDecimal;
 import java.util.List;
 
 public class TKLoaiToaController {
 
     private final TKLoaiToaPanel panel;
     private final LoaiToaApiClient dao;
-    private DefaultTableModel tableModel;
+    private final DefaultTableModel tableModel;
 
     public TKLoaiToaController(TKLoaiToaPanel panel) {
         this.panel = panel;
