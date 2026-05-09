@@ -79,6 +79,7 @@ public class TKNhanVienController {
             } catch (Exception ex) {
                 ex.printStackTrace();
                 panel.showError(ex.getMessage());
+                refresh();
             }
         }
     }
