@@ -21,7 +21,6 @@ public class QLGaTauPanel extends BasePanel {
     private JButton btnthem, btnsua, btnxoa, btnreset;
     private DefaultTableModel model;
     private JTable table;
-    private boolean isEditmode = false;
 
     public QLGaTauPanel() {
         initComponents();
@@ -138,8 +137,7 @@ public class QLGaTauPanel extends BasePanel {
     }
 
     public void startEditMode() {
-        isEditmode = true;
-        fieldMaga.setEnabled(false);
+        fieldMaga.setEditable(false);
         btnthem.setEnabled(false);
         btnsua.setEnabled(true);
         btnxoa.setEnabled(true);
@@ -147,15 +145,13 @@ public class QLGaTauPanel extends BasePanel {
     }
 
     public void resetForm() {
-        isEditmode = false;
-
-        fieldMaga.setEnabled(true);
+        fieldMaga.setEditable(true);
         fieldMaga.setText("");
-        fieldTenga.setEnabled(true);
+
         fieldTenga.setText("");
-        fieldDiachi.setEnabled(true);
+
         fieldDiachi.setText("");
-        fieldThanhpho.setEnabled(true);
+
         fieldThanhpho.setText("");
 
         btnthem.setEnabled(true);

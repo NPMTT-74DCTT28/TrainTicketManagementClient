@@ -25,7 +25,6 @@ public final class QLToaTauPanel extends BasePanel {
     protected void initComponents() {
         setLayout(new BorderLayout());
 
-        // Tiêu đề
         JPanel panelTitle = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelTitle.setBackground(PRIMARY_COLOR);
         JLabel labelTitle = new JLabel("QUẢN LÝ TOA TÀU");
@@ -33,7 +32,6 @@ public final class QLToaTauPanel extends BasePanel {
         labelTitle.setForeground(Color.WHITE);
         panelTitle.add(labelTitle);
 
-        // Form nhập liệu
         JPanel panelForm = new JPanel(new GridLayout(1, 3, 10, 5));
         panelForm.setBorder(new EmptyBorder(10, 5, 10, 5));
         panelForm.setBackground(Color.WHITE);
@@ -47,7 +45,6 @@ public final class QLToaTauPanel extends BasePanel {
         boxLoaiToa = new JComboBox<>();
         panelForm.add(createInputField("Loại toa:", boxLoaiToa, Color.WHITE));
 
-        // Nút chức năng
         buttonThem = createStyledButton("Thêm", new Dimension(80, 40), PRIMARY_COLOR, Color.WHITE);
         buttonSua = createStyledButton("Sửa", new Dimension(80, 40), new Color(255, 193, 7), Color.BLACK);
         buttonSua.setEnabled(false);
@@ -62,14 +59,12 @@ public final class QLToaTauPanel extends BasePanel {
         panelButtons.add(buttonXoa);
         panelButtons.add(buttonReset);
 
-        // Ghép phần trên
         JPanel panelTop = new JPanel(new BorderLayout(0, 5));
         panelTop.setBackground(Color.WHITE);
         panelTop.add(panelTitle, BorderLayout.NORTH);
         panelTop.add(panelForm, BorderLayout.CENTER);
         panelTop.add(panelButtons, BorderLayout.SOUTH);
 
-        // Bảng hiển thị
         String[] columns = {"ID", "Mã Toa", "Thuộc Tàu", "Loại Toa"};
         DefaultTableModel model = new DefaultTableModel(columns, 0);
         table = new JTable(model);
@@ -83,7 +78,6 @@ public final class QLToaTauPanel extends BasePanel {
         add(scrollPane, BorderLayout.CENTER);
     }
 
-    // --- Getter cho dữ liệu form ---
     public String getMaToa() {
         return fieldMaToa.getText().trim();
     }
@@ -104,10 +98,10 @@ public final class QLToaTauPanel extends BasePanel {
         return table;
     }
 
-    // --- Chế độ chỉnh sửa ---
     public void startEditMode() {
-        fieldMaToa.setEnabled(false);
+        fieldMaToa.setEditable(false);
         fieldMaToa.setBackground(new Color(240, 240, 240));
+
         buttonThem.setEnabled(false);
         buttonSua.setEnabled(true);
         buttonXoa.setEnabled(true);
@@ -115,9 +109,10 @@ public final class QLToaTauPanel extends BasePanel {
     }
 
     public void resetForm() {
-        fieldMaToa.setEnabled(true);
+        fieldMaToa.setEditable(true);
         fieldMaToa.setText("");
         fieldMaToa.setBackground(Color.WHITE);
+
         if (boxTau.getItemCount() > 0) boxTau.setSelectedIndex(0);
         if (boxLoaiToa.getItemCount() > 0) boxLoaiToa.setSelectedIndex(0);
         buttonThem.setEnabled(true);
@@ -126,7 +121,6 @@ public final class QLToaTauPanel extends BasePanel {
         table.clearSelection();
     }
 
-    // --- Gắn listener ---
     public void addThemListener(ActionListener l) {
         buttonThem.addActionListener(l);
     }
