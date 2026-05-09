@@ -119,7 +119,7 @@ public class QLVeTauController {
     private void refresh() {
         panel.resetForm();
         try {
-            panel.setGiaVe(String.valueOf(dao.getGiaVe(panel.getIdLichTrinh(), panel.getIdGhe())));
+            tinhVaSetGiaVe();
             List<VeTauResponse> list = dao.getAllVeTau();
             model.setRowCount(0);
             for (VeTauResponse v : list) {
@@ -236,6 +236,7 @@ public class QLVeTauController {
         @Override
         public void actionPerformed(ActionEvent e) {
             panel.resetForm();
+            tinhVaSetGiaVe();
         }
     }
 
@@ -243,6 +244,23 @@ public class QLVeTauController {
         @Override
         public void actionPerformed(ActionEvent e) {
             refresh();
+        }
+    }
+
+    private void tinhVaSetGiaVe() {
+        try {
+            int idLichTrinh = panel.getIdLichTrinh();
+            int idGhe = panel.getIdGhe();
+            if (idLichTrinh > 0 && idGhe > 0) {
+                double gia = dao.getGiaVe(idLichTrinh, idGhe);
+                panel.setGiaVe(String.valueOf(gia));
+            } else {
+                panel.setGiaVe("0");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            panel.showError("Lỗi tính giá vé: " + ex.getMessage());
+            panel.setGiaVe("0");
         }
     }
 
@@ -298,31 +316,16 @@ public class QLVeTauController {
     }
 
     public class boxLichTRinhListener implements ActionListener {
-
         @Override
         public void actionPerformed(ActionEvent e) {
-            try {
-                int idLichTrinh = panel.getIdLichTrinh();
-                int idGhe = panel.getIdGhe();
-                panel.setGiaVe(String.valueOf(dao.getGiaVe(idLichTrinh, idGhe)));
-            } catch (Exception ex) {
-                ex.printStackTrace();
-                panel.showError(ex.getMessage());
-            }
+            tinhVaSetGiaVe();
         }
     }
 
     public class boxGheListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            try {
-                int idLichTrinh = panel.getIdLichTrinh();
-                int idGhe = panel.getIdGhe();
-                panel.setGiaVe(String.valueOf(dao.getGiaVe(idLichTrinh, idGhe)));
-            } catch (Exception ex) {
-                ex.printStackTrace();
-                panel.showError(ex.getMessage());
-            }
+            tinhVaSetGiaVe();
         }
     }
 }

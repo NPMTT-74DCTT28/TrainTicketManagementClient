@@ -265,7 +265,7 @@ public final class QLVeTauPanel extends BasePanel {
 
     public void startEditMode() {
         isEditMode = true;
-        fieldMaVe.setEnabled(false);
+        fieldMaVe.setEditable(false);
 
         buttonThem.setEnabled(false);
         buttonSua.setEnabled(true);
@@ -282,7 +282,6 @@ public final class QLVeTauPanel extends BasePanel {
         boxLichTrinh.setSelectedIndex(0);
         boxGhe.setSelectedIndex(0);
         boxNhanVien.setSelectedIndex(0);
-        fieldGiaVe.setText(String.valueOf(0));
         if (boxTrangThai.getItemCount() > 0) {
             boxTrangThai.setSelectedIndex(0);
         }
