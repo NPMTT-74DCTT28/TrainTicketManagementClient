@@ -144,11 +144,11 @@ public class QLGhePanel extends BasePanel {
     }
 
     public void resetForm() {
-        fieldSoGhe.setEnabled(true);
         fieldSoGhe.setText("");
         fieldSoGhe.setBackground(Color.white);
 
         ComboBoxIDToaTau.setSelectedIndex(0);
+
         buttonThem.setEnabled(true);
         buttonSua.setEnabled(false);
         buttonXoa.setEnabled(false);

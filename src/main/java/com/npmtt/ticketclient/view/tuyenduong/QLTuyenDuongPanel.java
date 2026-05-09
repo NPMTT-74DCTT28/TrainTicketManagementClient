@@ -20,7 +20,6 @@ import java.awt.event.MouseListener;
 import java.util.List;
 
 public final class QLTuyenDuongPanel extends BasePanel {
-    public boolean isEditMode = false;
     private JTextField fieldMaTuyen, fieldTenTuyen, fieldKhoangcach, fieldGiaCB;
     private JComboBox<GaTauDTO> cboGadi, cboGaden;
     private JButton btnthem, btnsua, btnxoa, btnreset;
@@ -185,9 +184,9 @@ public final class QLTuyenDuongPanel extends BasePanel {
 
 
     public void startEditMode() {
-        isEditMode = true;
-        fieldMaTuyen.setEnabled(false);
+        fieldMaTuyen.setEditable(false);
         fieldTenTuyen.setEnabled(true);
+
         cboGadi.setEnabled(true);
         cboGaden.setEnabled(true);
         fieldKhoangcach.setEnabled(true);
@@ -199,8 +198,7 @@ public final class QLTuyenDuongPanel extends BasePanel {
     }
 
     public void resetForm() {
-        isEditMode = false;
-        fieldMaTuyen.setEnabled(true);
+        fieldMaTuyen.setEditable(true);
         fieldMaTuyen.setText("");
         fieldTenTuyen.setEnabled(true);
         fieldTenTuyen.setText("");

@@ -355,9 +355,9 @@ public final class QLNhanVienPanel extends BasePanel {
     public void startEditMode() {
         isEditMode = true;
 
-        fieldMaNhanVien.setEnabled(false);
+        fieldMaNhanVien.setEditable(false);
 
-        fieldMatKhau.setEnabled(false);
+        fieldMatKhau.setEditable(false);
         fieldMatKhau.setText("");
 
         buttonThem.setEnabled(false);
@@ -370,10 +370,10 @@ public final class QLNhanVienPanel extends BasePanel {
     public void resetForm() {
         isEditMode = false;
 
-        fieldMaNhanVien.setEnabled(true);
+        fieldMaNhanVien.setEditable(true);
         fieldMaNhanVien.setText("");
 
-        fieldMatKhau.setEnabled(true);
+        fieldMatKhau.setEditable(true);
         fieldMatKhau.setText("");
 
         fieldHoTen.setText("");

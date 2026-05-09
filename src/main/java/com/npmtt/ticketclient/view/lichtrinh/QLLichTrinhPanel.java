@@ -34,7 +34,6 @@ public class QLLichTrinhPanel extends BasePanel {
 
     private JButton buttonThem, buttonSua, buttonXoa, buttonReset;
     private JTable table;
-    private boolean isEditMode = false;
 
     public QLLichTrinhPanel() {
         initComponents();
@@ -212,8 +211,8 @@ public class QLLichTrinhPanel extends BasePanel {
     }
 
     public void startEditMode() {
-        isEditMode = true;
-        fieldMaLichTrinh.setEnabled(false);
+        fieldMaLichTrinh.setEditable(false);
+
         buttonThem.setEnabled(false);
         buttonSua.setEnabled(true);
         buttonXoa.setEnabled(true);
@@ -221,9 +220,9 @@ public class QLLichTrinhPanel extends BasePanel {
     }
 
     public void resetForm() {
-        isEditMode = false;
-        fieldMaLichTrinh.setEnabled(true);
+        fieldMaLichTrinh.setEditable(true);
         fieldMaLichTrinh.setText("");
+
         if (boxTau.getItemCount() > 0) boxTau.setSelectedIndex(0);
         if (boxTuyenDuong.getItemCount() > 0) boxTuyenDuong.setSelectedIndex(0);
         spinnerNgayDi.setValue(new Date());

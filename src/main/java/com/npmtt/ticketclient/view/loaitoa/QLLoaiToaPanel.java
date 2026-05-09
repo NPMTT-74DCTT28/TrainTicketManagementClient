@@ -74,7 +74,6 @@ public class QLLoaiToaPanel extends BasePanel {
         TableColumn columnID = columnModel.getColumn(0);
         tblLoaiToa.removeColumn(columnID);
 
-
         JScrollPane scrollPane = new JScrollPane(tblLoaiToa);
         scrollPane.setFont(new Font("Segoe UI", Font.BOLD, 13));
         scrollPane.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -144,7 +143,6 @@ public class QLLoaiToaPanel extends BasePanel {
     }
 
     public void resetForm() {
-        fieldTenLoai.setEnabled(true);
         fieldTenLoai.setText("");
         fieldTenLoai.setBackground(Color.white);
 
