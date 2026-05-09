@@ -31,7 +31,6 @@ public final class QLKhachHangPanel extends BasePanel {
     private JTextField fieldDiaChi;
     private JButton buttonThem, buttonSua, buttonXoa, buttonReset, buttonRefresh;
     private JTable table;
-    private boolean isEditMode = false;
 
     public QLKhachHangPanel() {
         initComponents();
@@ -271,17 +270,10 @@ public final class QLKhachHangPanel extends BasePanel {
         String sdt = getSdt();
         String diaChi = getDiaChi();
 
-        if (isEditMode) {
-            return new KhachHangRequest(cccd, hoTen, ngaySinh, gioiTinh, sdt, diaChi);
-        } else {
-            return new KhachHangRequest(cccd, hoTen, ngaySinh, gioiTinh, sdt, diaChi);
-        }
+        return new KhachHangRequest(cccd, hoTen, ngaySinh, gioiTinh, sdt, diaChi);
     }
 
     public void startEditMode() {
-        isEditMode = true;
-        fieldCccd.setEditable(false);
-
         buttonThem.setEnabled(false);
         buttonSua.setEnabled(true);
         buttonXoa.setEnabled(true);
@@ -291,8 +283,6 @@ public final class QLKhachHangPanel extends BasePanel {
 
 
     public void resetForm() {
-        isEditMode = false;
-
         fieldCccd.setEditable(true);
         fieldCccd.setText("");
 

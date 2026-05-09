@@ -1,6 +1,7 @@
 package com.npmtt.ticketclient.controller.core;
 
 import com.npmtt.ticketclient.apiclient.ThongKeApiClient;
+import com.npmtt.ticketclient.util.SessionManager;
 import com.npmtt.ticketclient.view.core.Dashboard;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
@@ -23,8 +24,10 @@ public class DashboardController {
 
         loadData();
 
-        Timer timer = new Timer(60000, e -> loadData());
-        timer.start();
+        if (SessionManager.getCurrentUser() != null) {
+            Timer timer = new Timer(60000, e -> loadData());
+            timer.start();
+        }
 
         this.dashboard.setVisible(true);
     }

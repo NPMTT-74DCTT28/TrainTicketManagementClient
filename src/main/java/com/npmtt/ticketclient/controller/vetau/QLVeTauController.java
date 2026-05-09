@@ -107,7 +107,6 @@ public class QLVeTauController {
             NhanVienApiClient dao = new NhanVienApiClient();
             mapNV.clear();
             List<NhanVienResponse> nhanViens = dao.getAllNhanVien();
-            panel.setBoxNhanVien(nhanViens);
             for (NhanVienResponse nhanVien : nhanViens) {
                 mapNV.put(
                         nhanVien.getId(),
@@ -295,8 +294,6 @@ public class QLVeTauController {
                 panel.setIdKhachHang(selectedVT.getIdKhachHang());
                 panel.setIdLichTrinh(selectedVT.getIdLichTrinh());
                 panel.setIdGhe(selectedVT.getIdGhe());
-                panel.setIdNhanVien(selectedVT.getIdNhanVien());
-//                panel.setGiaVe(model.getValueAt(selectedRow, 7).toString());
                 panel.setTrangThai(model.getValueAt(selectedRow, 8).toString());
             } catch (Exception ex) {
                 ex.printStackTrace();
