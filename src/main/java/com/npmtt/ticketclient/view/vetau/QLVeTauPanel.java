@@ -5,8 +5,7 @@ import com.npmtt.ticketclient.dto.response.GheResponse;
 import com.npmtt.ticketclient.dto.response.KhachHangResponse;
 import com.npmtt.ticketclient.dto.response.LichTrinhResponse;
 import com.npmtt.ticketclient.dto.response.NhanVienResponse;
-import com.npmtt.ticketclient.enums.TrangThaiLichTrinh;
-import com.npmtt.ticketclient.util.DinhDang;
+import com.npmtt.ticketclient.enums.TrangThaiVe;
 import com.npmtt.ticketclient.view.BasePanel;
 
 import javax.swing.*;
@@ -20,9 +19,6 @@ import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.List;
 
 public final class QLVeTauPanel extends BasePanel {
@@ -31,7 +27,6 @@ public final class QLVeTauPanel extends BasePanel {
     private JComboBox<LichTrinhResponse> boxLichTrinh;
     private JComboBox<GheResponse> boxGhe;
     private JComboBox<NhanVienResponse> boxNhanVien;
-    private JSpinner spinnerNgayDatVe;
     private JTextField fieldGiaVe;
     private JComboBox<Object> boxTrangThai;
     private JButton buttonThem, buttonSua, buttonXoa, buttonReset, buttonRefresh;
@@ -77,15 +72,12 @@ public final class QLVeTauPanel extends BasePanel {
         boxNhanVien = new JComboBox<>();
         panelForm.add(createInputField("Id nhân viên", boxNhanVien, Color.WHITE));
 
-        spinnerNgayDatVe = new JSpinner(new SpinnerDateModel());
-        JSpinner.DateEditor editor = new JSpinner.DateEditor(spinnerNgayDatVe, DinhDang.DATE_TIME_VN);
-        spinnerNgayDatVe.setEditor(editor);
-        panelForm.add(createInputField("Ngày đặt vé", spinnerNgayDatVe, Color.WHITE));
-
         fieldGiaVe = new JTextField();
+        fieldGiaVe.setEditable(false);
+        fieldGiaVe.setText(String.valueOf(0));
         panelForm.add(createInputField("Giá vé", fieldGiaVe, Color.WHITE));
 
-        boxTrangThai = new JComboBox<>(TrangThaiLichTrinh.values());
+        boxTrangThai = new JComboBox<>(TrangThaiVe.values());
         panelForm.add(createInputField("Trạng thái", boxTrangThai, Color.WHITE));
 
         buttonThem = createStyledButton("Thêm", new Dimension(80, 40), PRIMARY_COLOR, Color.WHITE);
@@ -227,16 +219,6 @@ public final class QLVeTauPanel extends BasePanel {
         }
     }
 
-    public LocalDateTime getNgayDatVe() {
-        Date date = (Date) spinnerNgayDatVe.getValue();
-        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-    }
-
-    public void setNgayDatVe(LocalDateTime ngayDatVe) {
-        if (ngayDatVe == null) spinnerNgayDatVe.setValue(new Date());
-        else spinnerNgayDatVe.setValue(Date.from(ngayDatVe.atZone(ZoneId.systemDefault()).toInstant()));
-    }
-
     public double getGiaVe() {
         if (!fieldGiaVe.getText().trim().isEmpty()) {
             return Double.parseDouble(fieldGiaVe.getText().trim());
@@ -275,11 +257,10 @@ public final class QLVeTauPanel extends BasePanel {
         int idLichTrinh = getIdLichTrinh();
         int idGhe = getIdGhe();
         int idNhanVien = getIdNhanVien();
-        LocalDateTime ngayDatVe = getNgayDatVe();
         double giaVe = getGiaVe();
         String trangThai = getTrangThai();
 
-        return new VeTauRequest(maVe, idKhachHang, idLichTrinh, idGhe, idNhanVien, ngayDatVe, giaVe, trangThai);
+        return new VeTauRequest(maVe, idKhachHang, idLichTrinh, idGhe, idNhanVien, giaVe, trangThai);
     }
 
     public void startEditMode() {
@@ -301,8 +282,7 @@ public final class QLVeTauPanel extends BasePanel {
         boxLichTrinh.setSelectedIndex(0);
         boxGhe.setSelectedIndex(0);
         boxNhanVien.setSelectedIndex(0);
-        spinnerNgayDatVe.setValue(new Date());
-        fieldGiaVe.setText("");
+        fieldGiaVe.setText(String.valueOf(0));
         if (boxTrangThai.getItemCount() > 0) {
             boxTrangThai.setSelectedIndex(0);
         }
@@ -367,5 +347,11 @@ public final class QLVeTauPanel extends BasePanel {
         table.addMouseListener(l);
     }
 
+    public void addboxLichTrinhListener(ActionListener l) {
+        boxLichTrinh.addActionListener(l);
+    }
 
+    public void addboxGheListener(ActionListener l) {
+        boxGhe.addActionListener(l);
+    }
 }

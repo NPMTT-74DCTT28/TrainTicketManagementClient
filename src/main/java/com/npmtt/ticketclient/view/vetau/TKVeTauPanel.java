@@ -1,6 +1,5 @@
 package com.npmtt.ticketclient.view.vetau;
 
-import com.npmtt.ticketclient.enums.GioiTinh;
 import com.npmtt.ticketclient.view.BasePanel;
 
 import javax.swing.*;
@@ -44,7 +43,8 @@ public class TKVeTauPanel extends BasePanel {
         panelForm.setBackground(Color.WHITE);
 
         fieldTuKhoa = new JTextField();
-        panelForm.add(createInputField("<html>Mã vé / Tên khách hàng / Ngày đặt</html>", fieldTuKhoa, Color.WHITE));
+        panelForm.add(createInputField("Mã vé", fieldTuKhoa, Color.WHITE));
+
 
         buttonTimKiem = createStyledButton("Tìm kiếm", new Dimension(100, 40), PRIMARY_COLOR, Color.WHITE);
         buttonReset = createStyledButton("Reset form", new Dimension(110, 40), PRIMARY_COLOR, Color.WHITE);
