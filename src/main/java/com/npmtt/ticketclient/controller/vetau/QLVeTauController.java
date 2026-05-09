@@ -10,7 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 
@@ -24,6 +23,7 @@ public class QLVeTauController {
     private final HashMap<Integer, String> mapNV = new HashMap<>();
     private int selectedRow;
 
+
     public QLVeTauController(QLVeTauPanel panel) {
         this.dao = new VeTauApiClient();
         this.panel = panel;
@@ -33,6 +33,8 @@ public class QLVeTauController {
         panel.addResetFormListener(new ResetFormListener());
         panel.addRefreshListener(new RefreshListener());
         panel.addTableMouseClickListener(new TableMouseClickListener());
+        panel.addboxLichTrinhListener(new boxLichTRinhListener());
+        panel.addboxGheListener(new boxGheListener());
 
         if (this.panel.getTable() != null) {
             model = (DefaultTableModel) this.panel.getTable().getModel();
@@ -117,6 +119,7 @@ public class QLVeTauController {
     private void refresh() {
         panel.resetForm();
         try {
+            panel.setGiaVe(String.valueOf(dao.getGiaVe(panel.getIdLichTrinh(), panel.getIdGhe())));
             List<VeTauResponse> list = dao.getAllVeTau();
             model.setRowCount(0);
             for (VeTauResponse v : list) {
@@ -153,10 +156,6 @@ public class QLVeTauController {
                     panel.showError("Vui lòng nhập đầy đủ thông tin!");
                     return;
                 }
-                if (vt.getNgayDatVe().isBefore(LocalDateTime.now()) ) {
-                    panel.showError("Ngày đặt vé phải lớn hơn ngày hiện tại!");
-                    return;
-                }
                 if (vt.getGiaVe() <= 0) {
                     panel.showError("Giá vé phải lớn hơn 0!");
                     return;
@@ -187,15 +186,11 @@ public class QLVeTauController {
                     panel.showError("Vui lòng nhập đầy đủ thông tin");
                     return;
                 }
-                if (vt.getNgayDatVe().isBefore(LocalDateTime.now())) {
-                    panel.showError("Ngày đặt vé phải lớn hơn ngày hiện tại");
-                    return;
-                }
                 if (vt.getGiaVe() <= 0) {
                     panel.showError("Giá vé phải lớn hơn 0!");
                     return;
                 }
-                if (panel.showConfirm("Bạn có muốn cập nhật thông tin của" + vt.getMaVe() + " không ?")) {
+                if (panel.showConfirm("Bạn có muốn cập nhật thông tin của " + vt.getMaVe() + " không ?")) {
                     if (dao.updateVeTau(vt) != null) {
                         panel.showMessage("Cập nhật thành công");
                         refresh();
@@ -217,11 +212,12 @@ public class QLVeTauController {
         public void actionPerformed(ActionEvent e) {
             try {
                 int id = Integer.parseInt(model.getValueAt(selectedRow, 0).toString());
+                String maVe = model.getValueAt(selectedRow, 1).toString();
                 if (id < 1) {
                     return;
                 }
 
-                if (panel.showConfirm("Bạn có muốn xóa" + id + "không ?")) {
+                if (panel.showConfirm("Bạn có muốn xóa " + maVe + " không ?")) {
                     if (dao.deleteVeTau(id)) {
                         panel.showMessage("Xóa thành công");
                         refresh();
@@ -277,14 +273,7 @@ public class QLVeTauController {
                 panel.setIdLichTrinh(selectedVT.getIdLichTrinh());
                 panel.setIdGhe(selectedVT.getIdGhe());
                 panel.setIdNhanVien(selectedVT.getIdNhanVien());
-                String ngayDatVe = model.getValueAt(selectedRow, 6).toString();
-                try {
-                    panel.setNgayDatVe(LocalDateTime.parse(ngayDatVe));
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                    panel.showError("Lỗi khi chuyển đổi ngày tháng: " + ex.getMessage());
-                }
-                panel.setGiaVe(model.getValueAt(selectedRow, 7).toString());
+//                panel.setGiaVe(model.getValueAt(selectedRow, 7).toString());
                 panel.setTrangThai(model.getValueAt(selectedRow, 8).toString());
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -305,6 +294,35 @@ public class QLVeTauController {
 
         @Override
         public void mouseExited(MouseEvent e) {
+        }
+    }
+
+    public class boxLichTRinhListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                int idLichTrinh = panel.getIdLichTrinh();
+                int idGhe = panel.getIdGhe();
+                panel.setGiaVe(String.valueOf(dao.getGiaVe(idLichTrinh, idGhe)));
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                panel.showError(ex.getMessage());
+            }
+        }
+    }
+
+    public class boxGheListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                int idLichTrinh = panel.getIdLichTrinh();
+                int idGhe = panel.getIdGhe();
+                panel.setGiaVe(String.valueOf(dao.getGiaVe(idLichTrinh, idGhe)));
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                panel.showError(ex.getMessage());
+            }
         }
     }
 }

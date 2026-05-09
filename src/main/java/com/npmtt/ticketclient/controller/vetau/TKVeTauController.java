@@ -7,7 +7,6 @@ import com.npmtt.ticketclient.view.vetau.TKVeTauPanel;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,6 +24,7 @@ public class TKVeTauController {
         this.dao = new VeTauApiClient();
         panel.addTimKiemListener(new TimkiemListener());
         panel.addResetFormListener(new ResetListener());
+        panel.addLamMoiListener(new RefreshListener());
         this.model = (DefaultTableModel) panel.getTable().getModel();
         loadKhachHang();
         loadLichTrinh();
@@ -134,15 +134,13 @@ public class TKVeTauController {
         public void actionPerformed(ActionEvent e) {
             try {
                 model.setRowCount(0);
-                String timKiem = panel.getTuKhoa();
                 String maVe = panel.getTuKhoa();
-                LocalDateTime ngayDatve = LocalDateTime.parse(panel.getTuKhoa());
-                if (timKiem.isEmpty()) {
+                if (maVe.isEmpty()) {
                     refreshTable();
                     return;
                 }
 
-                List<VeTauResponse> list = dao.searchVeTau(timKiem, maVe, ngayDatve);
+                List<VeTauResponse> list = dao.searchVeTau(maVe);
 
                 for (VeTauResponse vt : list) {
                     String tenKhachHang = mapKH.getOrDefault(
@@ -162,6 +160,7 @@ public class TKVeTauController {
                             String.valueOf(vt.getIdNhanVien())
                     );
                     model.addRow(new Object[]{
+                            vt.getId(),
                             vt.getMaVe(),
                             tenKhachHang,
                             tenLichTrinh,
@@ -183,6 +182,12 @@ public class TKVeTauController {
         @Override
         public void actionPerformed(ActionEvent e) {
             panel.resetForm();
+        }
+    }
+
+    private class RefreshListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
             refreshTable();
         }
     }

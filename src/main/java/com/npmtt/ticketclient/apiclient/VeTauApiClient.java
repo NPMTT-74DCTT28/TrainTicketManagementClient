@@ -1,6 +1,6 @@
 package com.npmtt.ticketclient.apiclient;
 
-import com.google.gson.Gson;
+import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import com.npmtt.ticketclient.dto.request.VeTauRequest;
 import com.npmtt.ticketclient.dto.response.ApiResponse;
@@ -27,7 +27,14 @@ public class VeTauApiClient {
 
     private static final String API_URL = ConfigLoader.getBaseApiUrl() + "/ve-tau";
     private final HttpClient httpClient = HttpClient.newHttpClient();
-    private final Gson gson = new Gson();
+    private final Gson gson = new GsonBuilder()
+            .registerTypeAdapter(LocalDateTime.class,
+                    (JsonDeserializer<LocalDateTime>) (json, type, context) ->
+                            LocalDateTime.parse(json.toString().replace("\"", "").trim()))
+            .registerTypeAdapter(LocalDateTime.class,
+                    (JsonSerializer<LocalDateTime>) (src, typeOfSrc, context) ->
+                            new JsonPrimitive(src.toString()))
+            .create();
 
     private List<VeTauResponse> getListVeTauResponse(HttpResponse<String> response) throws Exception {
         if (response.statusCode() == 200) {
@@ -137,17 +144,11 @@ public class VeTauApiClient {
         }
     }
 
-    public List<VeTauResponse> searchVeTau(String keyword, String maVe, LocalDateTime ngayDatVe) throws Exception{
+    public List<VeTauResponse> searchVeTau(String maVe) throws Exception {
         StringBuilder urlBuilder = new StringBuilder(API_URL + "/search?");
 
-        if (keyword != null && !keyword.isEmpty()){
-            urlBuilder.append("keyword=").append(URLEncoder.encode(keyword, StandardCharsets.UTF_8)).append("&");
-        }
-        if (maVe != null && !maVe.trim().isEmpty()) {
-            urlBuilder.append("maVe=").append(maVe).append("&");
-        }
-        if (ngayDatVe != null && ngayDatVe.isBefore(LocalDateTime.now())){
-            urlBuilder.append("ngayDatVe=").append(ngayDatVe);
+        if (maVe != null && !maVe.isEmpty()) {
+            urlBuilder.append("maVe=").append(URLEncoder.encode(maVe, StandardCharsets.UTF_8));
         }
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -158,5 +159,49 @@ public class VeTauApiClient {
 
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         return getListVeTauResponse(response);
+    }
+
+    public double getGiaVe(int idLichTrinh, int idGhe) throws Exception {
+        if (idLichTrinh < 1 || idGhe < 1) return 0;
+        String url = API_URL + "/gia-ve?idLichTrinh=" + idLichTrinh + "&idGhe=" + idGhe;
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .header("Authorization", "Bearer " + SessionManager.getCurrentUser().getToken())
+                .GET()
+                .build();
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        if (response.statusCode() == 200) {
+            Type responseType = new TypeToken<ApiResponse<Double>>() {
+            }.getType();
+            ApiResponse<Double> apiResponse = gson.fromJson(response.body(), responseType);
+            return apiResponse.getData();
+        } else {
+            Type responseType = new TypeToken<ApiResponse<Object>>() {
+            }.getType();
+            ApiResponse<Object> errorResponse = gson.fromJson(response.body(), responseType);
+            throw new Exception(errorResponse.getMessage());
+        }
+    }
+
+    public double getGiaVe(int idVe) throws Exception {
+        if (idVe < 1) return 0;
+        String url = API_URL + "/gia-ve/" + idVe;
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .header("Authorization", "Bearer " + SessionManager.getCurrentUser().getToken())
+                .GET()
+                .build();
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        if (response.statusCode() == 200) {
+            Type responseType = new TypeToken<ApiResponse<Double>>() {
+            }.getType();
+            ApiResponse<Double> apiResponse = gson.fromJson(response.body(), responseType);
+            return apiResponse.getData();
+        } else {
+            Type responseType = new TypeToken<ApiResponse<Object>>() {
+            }.getType();
+            ApiResponse<Object> errorResponse = gson.fromJson(response.body(), responseType);
+            throw new Exception(errorResponse.getMessage());
+        }
     }
 }
