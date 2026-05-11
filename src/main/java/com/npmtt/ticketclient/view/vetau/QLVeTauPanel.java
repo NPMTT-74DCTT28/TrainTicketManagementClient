@@ -4,8 +4,8 @@ import com.npmtt.ticketclient.dto.request.VeTauRequest;
 import com.npmtt.ticketclient.dto.response.GheResponse;
 import com.npmtt.ticketclient.dto.response.KhachHangResponse;
 import com.npmtt.ticketclient.dto.response.LichTrinhResponse;
-import com.npmtt.ticketclient.dto.response.NhanVienResponse;
 import com.npmtt.ticketclient.enums.TrangThaiVe;
+import com.npmtt.ticketclient.util.SessionManager;
 import com.npmtt.ticketclient.view.BasePanel;
 
 import javax.swing.*;
@@ -26,13 +26,11 @@ public final class QLVeTauPanel extends BasePanel {
     private JComboBox<KhachHangResponse> boxKhachHang;
     private JComboBox<LichTrinhResponse> boxLichTrinh;
     private JComboBox<GheResponse> boxGhe;
-    private JComboBox<NhanVienResponse> boxNhanVien;
     private JTextField fieldGiaVe;
     private JComboBox<Object> boxTrangThai;
     private JButton buttonThem, buttonSua, buttonXoa, buttonReset, buttonRefresh;
     private DefaultTableModel model;
     private JTable table;
-    private boolean isEditMode = false;
 
     public QLVeTauPanel() {
         initComponents();
@@ -61,16 +59,13 @@ public final class QLVeTauPanel extends BasePanel {
         panelForm.add(createInputField("Mã vé", fieldMaVe, Color.WHITE));
 
         boxKhachHang = new JComboBox<>();
-        panelForm.add(createInputField("Id khách hàng", boxKhachHang, Color.WHITE));
+        panelForm.add(createInputField("Khách hàng", boxKhachHang, Color.WHITE));
 
         boxLichTrinh = new JComboBox<>();
-        panelForm.add(createInputField("Id lịch trình", boxLichTrinh, Color.WHITE));
+        panelForm.add(createInputField("Lịch trình", boxLichTrinh, Color.WHITE));
 
         boxGhe = new JComboBox<>();
-        panelForm.add(createInputField("Id ghế", boxGhe, Color.WHITE));
-
-        boxNhanVien = new JComboBox<>();
-        panelForm.add(createInputField("Id nhân viên", boxNhanVien, Color.WHITE));
+        panelForm.add(createInputField("Ghế", boxGhe, Color.WHITE));
 
         fieldGiaVe = new JTextField();
         fieldGiaVe.setEditable(false);
@@ -97,7 +92,7 @@ public final class QLVeTauPanel extends BasePanel {
         panelTop.add(panelForm);
         panelTop.add(createButtonField(buttons, Color.white), BorderLayout.SOUTH);
 
-        Object[] columns = new Object[]{"Id", "Mã vé", "Id khách hàng", "Id lịch trình", "Id ghế", "Id nhân viên", "Ngày đặt vé", "Giá vé", "Trạng thái"};
+        Object[] columns = new Object[]{"Id", "Mã vé", "Khách hàng", "Lịch trình", "Ghế", "Nhân viên bán vé", "Ngày đặt vé", "Giá vé", "Trạng thái"};
         DefaultTableModel tableModel = new DefaultTableModel(columns, 0);
         table = new JTable(tableModel) {
             @Override
@@ -201,24 +196,6 @@ public final class QLVeTauPanel extends BasePanel {
         }
     }
 
-    public int getIdNhanVien(){
-        NhanVienResponse selected = (NhanVienResponse) boxNhanVien.getSelectedItem();
-        if (selected != null) {
-            return selected.getId();
-        }
-        return 0;
-    }
-
-    public void setIdNhanVien(int idNhanVien) {
-        for (int i = 0; i < boxNhanVien.getItemCount(); i++) {
-            NhanVienResponse nv = boxNhanVien.getItemAt(i);
-            if (nv.getId() == idNhanVien) {
-                boxNhanVien.setSelectedIndex(i);
-                break;
-            }
-        }
-    }
-
     public double getGiaVe() {
         if (!fieldGiaVe.getText().trim().isEmpty()) {
             return Double.parseDouble(fieldGiaVe.getText().trim());
@@ -256,7 +233,7 @@ public final class QLVeTauPanel extends BasePanel {
         int idKhachHang = getIdKhachHang();
         int idLichTrinh = getIdLichTrinh();
         int idGhe = getIdGhe();
-        int idNhanVien = getIdNhanVien();
+        int idNhanVien = SessionManager.getCurrentUser().getId();
         double giaVe = getGiaVe();
         String trangThai = getTrangThai();
 
@@ -264,7 +241,6 @@ public final class QLVeTauPanel extends BasePanel {
     }
 
     public void startEditMode() {
-        isEditMode = true;
         fieldMaVe.setEditable(false);
 
         buttonThem.setEnabled(false);
@@ -275,13 +251,11 @@ public final class QLVeTauPanel extends BasePanel {
     }
 
     public void resetForm() {
-        isEditMode = false;
-        fieldMaVe.setEnabled(true);
+        fieldMaVe.setEditable(true);
         fieldMaVe.setText("");
         boxKhachHang.setSelectedIndex(0);
         boxLichTrinh.setSelectedIndex(0);
         boxGhe.setSelectedIndex(0);
-        boxNhanVien.setSelectedIndex(0);
         if (boxTrangThai.getItemCount() > 0) {
             boxTrangThai.setSelectedIndex(0);
         }
@@ -313,12 +287,6 @@ public final class QLVeTauPanel extends BasePanel {
         boxGhe.removeAllItems();
         for (GheResponse g : list) {
             boxGhe.addItem(g);
-        }
-    }
-    public void setBoxNhanVien(List<NhanVienResponse> list) {
-        boxNhanVien.removeAllItems();
-        for (NhanVienResponse nv : list) {
-            boxNhanVien.addItem(nv);
         }
     }
 

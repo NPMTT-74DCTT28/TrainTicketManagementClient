@@ -33,34 +33,11 @@ public class TKLichTrinhController {
         this.tuyenDuongDAO = new TuyenDuongApiclient();
         this.tableModel = (DefaultTableModel) panel.getTable().getModel();
 
-        loadComboBoxData();
-
         refresh();
 
         panel.addTimKiemListener(new TimKiemListener());
         panel.addResetFormListener(e -> panel.resetForm());
         panel.addLamMoiListener(e -> refresh());
-    }
-
-    private void loadComboBoxData() {
-        try {
-            listTauCache = tauDAO.getAllTau();
-            panel.getBoxTau().removeAllItems();
-            panel.getBoxTau().addItem("Tất cả");
-            for (TauDTO t : listTauCache) {
-                panel.getBoxTau().addItem(t);
-            }
-
-            listTuyenCache = tuyenDuongDAO.getAllTuyenDuong();
-            panel.getBoxTuyenDuong().removeAllItems();
-            panel.getBoxTuyenDuong().addItem("Tất cả");
-            for (TuyenDuongResponse td : listTuyenCache) {
-                panel.getBoxTuyenDuong().addItem(td);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            panel.showError("Lỗi tải dữ liệu Tàu/Tuyến: " + e.getMessage());
-        }
     }
 
     private void refresh() {
@@ -116,20 +93,6 @@ public class TKLichTrinhController {
         public void actionPerformed(ActionEvent e) {
             try {
                 String tuKhoa = panel.getTuKhoa();
-
-                int idTau = 0;
-                Object selectedTau = panel.getBoxTau().getSelectedItem();
-                if (selectedTau instanceof TauDTO) {
-                    idTau = ((TauDTO) selectedTau).getId();
-                }
-
-                int idTuyen = 0;
-                Object selectedTuyen = panel.getBoxTuyenDuong().getSelectedItem();
-                if (selectedTuyen instanceof TuyenDuongResponse) {
-                    idTuyen = ((TuyenDuongResponse) selectedTuyen).getId();
-                }
-
-                String trangThai = panel.getTrangThai();
 
                 List<LichTrinhResponse> ketQua = lichTrinhDAO.searchLichTrinh(tuKhoa);
                 updateTable(ketQua);

@@ -44,6 +44,7 @@ public class TKVeTauController {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            panel.showError(e.getMessage());
         }
     }
 
@@ -59,6 +60,7 @@ public class TKVeTauController {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            panel.showError(e.getMessage());
         }
     }
 
@@ -74,6 +76,7 @@ public class TKVeTauController {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            panel.showError(e.getMessage());
         }
     }
 
@@ -89,6 +92,7 @@ public class TKVeTauController {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            panel.showError(e.getMessage());
         }
     }
 
@@ -125,7 +129,7 @@ public class TKVeTauController {
             model.fireTableDataChanged();
         } catch (Exception e) {
             e.printStackTrace();
-            panel.showError("Lỗi không xác định: " + e.getMessage());
+            panel.showError(e.getMessage());
         }
     }
 
@@ -173,7 +177,7 @@ public class TKVeTauController {
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
-                panel.showError("Lỗi tìm kiếm: " + ex.getMessage());
+                panel.showError(ex.getMessage());
             }
         }
     }

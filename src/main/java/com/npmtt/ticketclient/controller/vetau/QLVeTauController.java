@@ -62,6 +62,7 @@ public class QLVeTauController {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            panel.showError(e.getMessage());
         }
     }
 
@@ -79,6 +80,7 @@ public class QLVeTauController {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            panel.showError(e.getMessage());
         }
     }
 
@@ -96,6 +98,7 @@ public class QLVeTauController {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            panel.showError(e.getMessage());
         }
     }
 
@@ -104,7 +107,6 @@ public class QLVeTauController {
             NhanVienApiClient dao = new NhanVienApiClient();
             mapNV.clear();
             List<NhanVienResponse> nhanViens = dao.getAllNhanVien();
-            panel.setBoxNhanVien(nhanViens);
             for (NhanVienResponse nhanVien : nhanViens) {
                 mapNV.put(
                         nhanVien.getId(),
@@ -113,6 +115,7 @@ public class QLVeTauController {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            panel.showError(e.getMessage());
         }
     }
 
@@ -142,6 +145,7 @@ public class QLVeTauController {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            panel.showError(e.getMessage());
         }
         model.fireTableDataChanged();
     }
@@ -153,25 +157,25 @@ public class QLVeTauController {
                 VeTauRequest vt = panel.getVeTauFromForm();
 
                 if (vt.getMaVe().isEmpty()) {
-                    panel.showError("Vui lòng nhập đầy đủ thông tin!");
+                    panel.showError("Vui lòng nhập đầy đủ thông tin.");
                     return;
                 }
                 if (vt.getGiaVe() <= 0) {
-                    panel.showError("Giá vé phải lớn hơn 0!");
+                    panel.showError("Giá vé phải lớn hơn 0.");
                     return;
                 }
                 if (dao.createVeTau(vt) != null) {
-                    panel.showMessage("Thêm vé tàu thành công");
+                    panel.showMessage("Thêm vé tàu thành công!");
                     panel.resetForm();
                     refresh();
                 } else {
-                    panel.showError("Thêm thất bại");
+                    panel.showError("Thêm thất bại.");
                 }
             } catch (NumberFormatException ex) {
-                panel.showError("Giá vé phải là số");
+                panel.showError("Giá vé phải là số.");
             } catch (Exception ex) {
                 ex.printStackTrace();
-                panel.showError("Lỗi không xác định: " + ex.getMessage());
+                panel.showError(ex.getMessage());
             }
         }
     }
@@ -183,26 +187,26 @@ public class QLVeTauController {
                 VeTauRequest vt = panel.getVeTauFromForm();
                 vt.setId(Integer.parseInt(model.getValueAt(selectedRow, 0).toString()));
                 if (vt.getMaVe().isEmpty()) {
-                    panel.showError("Vui lòng nhập đầy đủ thông tin");
+                    panel.showError("Vui lòng nhập đầy đủ thông tin.");
                     return;
                 }
                 if (vt.getGiaVe() <= 0) {
-                    panel.showError("Giá vé phải lớn hơn 0!");
+                    panel.showError("Giá vé phải lớn hơn 0.");
                     return;
                 }
-                if (panel.showConfirm("Bạn có muốn cập nhật thông tin của " + vt.getMaVe() + " không ?")) {
+                if (panel.showConfirm("Bạn có muốn cập nhật thông tin của " + vt.getMaVe() + " không?")) {
                     if (dao.updateVeTau(vt) != null) {
-                        panel.showMessage("Cập nhật thành công");
+                        panel.showMessage("Cập nhật thành công!");
                         refresh();
                     } else {
-                        panel.showError("Cập nhật thất bại");
+                        panel.showError("Cập nhật thất bại.");
                     }
                 }
             } catch (NumberFormatException ex) {
-                panel.showError("Giá vé phải là số");
+                panel.showError("Giá vé phải là số.");
             } catch (Exception ex) {
                 ex.printStackTrace();
-                panel.showError("Lỗi hệ thống: " + ex.getMessage());
+                panel.showError(ex.getMessage());
             }
         }
     }
@@ -217,17 +221,17 @@ public class QLVeTauController {
                     return;
                 }
 
-                if (panel.showConfirm("Bạn có muốn xóa " + maVe + " không ?")) {
+                if (panel.showConfirm("Bạn có muốn xóa " + maVe + " không?")) {
                     if (dao.deleteVeTau(id)) {
-                        panel.showMessage("Xóa thành công");
+                        panel.showMessage("Xóa thành công!");
                         refresh();
                     } else {
-                        panel.showError("Xóa thất bại");
+                        panel.showError("Xóa thất bại.");
                     }
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
-                panel.showError("Lỗi hệ thống: " + ex.getMessage());
+                panel.showError(ex.getMessage());
             }
         }
     }
@@ -290,8 +294,6 @@ public class QLVeTauController {
                 panel.setIdKhachHang(selectedVT.getIdKhachHang());
                 panel.setIdLichTrinh(selectedVT.getIdLichTrinh());
                 panel.setIdGhe(selectedVT.getIdGhe());
-                panel.setIdNhanVien(selectedVT.getIdNhanVien());
-//                panel.setGiaVe(model.getValueAt(selectedRow, 7).toString());
                 panel.setTrangThai(model.getValueAt(selectedRow, 8).toString());
             } catch (Exception ex) {
                 ex.printStackTrace();

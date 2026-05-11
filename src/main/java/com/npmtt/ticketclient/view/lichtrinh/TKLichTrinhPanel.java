@@ -1,7 +1,6 @@
 package com.npmtt.ticketclient.view.lichtrinh;
 
 
-import com.npmtt.ticketclient.enums.TrangThaiLichTrinh;
 import com.npmtt.ticketclient.view.BasePanel;
 
 import javax.swing.*;
@@ -18,9 +17,6 @@ import java.awt.event.ActionListener;
 public class TKLichTrinhPanel extends BasePanel {
 
     private JTextField fieldTuKhoa;
-    private JComboBox<Object> boxTau;
-    private JComboBox<Object> boxTuyenDuong;
-    private JComboBox<Object> boxTrangThai;
 
     private JButton buttonTimKiem, buttonReset, buttonLamMoi;
     private JTable table;
@@ -50,21 +46,6 @@ public class TKLichTrinhPanel extends BasePanel {
 
         fieldTuKhoa = new JTextField();
         panelForm.add(createCompactInputField("Mã lịch trình", fieldTuKhoa));
-
-        boxTau = new JComboBox<>();
-        boxTau.setPrototypeDisplayValue("--------------------");
-        panelForm.add(createCompactInputField("Tàu", boxTau));
-
-        boxTuyenDuong = new JComboBox<>();
-        boxTuyenDuong.setPrototypeDisplayValue("--------------------");
-        panelForm.add(createCompactInputField("Tuyến đường", boxTuyenDuong));
-
-        boxTrangThai = new JComboBox<>();
-        boxTrangThai.addItem("Tất cả");
-        for (TrangThaiLichTrinh tt : TrangThaiLichTrinh.values()) {
-            boxTrangThai.addItem(tt.toString());
-        }
-        panelForm.add(createCompactInputField("Trạng thái", boxTrangThai));
 
 
         JPanel panelButtons = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5));
@@ -141,29 +122,12 @@ public class TKLichTrinhPanel extends BasePanel {
         return fieldTuKhoa.getText().trim();
     }
 
-    public JComboBox<Object> getBoxTau() {
-        return boxTau;
-    }
-
-    public JComboBox<Object> getBoxTuyenDuong() {
-        return boxTuyenDuong;
-    }
-
-    public String getTrangThai() {
-        Object selected = boxTrangThai.getSelectedItem();
-        if (selected == null || selected.toString().equalsIgnoreCase("Tất cả")) return null;
-        return selected.toString();
-    }
-
     public JTable getTable() {
         return table;
     }
 
     public void resetForm() {
         fieldTuKhoa.setText("");
-        if (boxTau.getItemCount() > 0) boxTau.setSelectedIndex(0);
-        if (boxTuyenDuong.getItemCount() > 0) boxTuyenDuong.setSelectedIndex(0);
-        if (boxTrangThai.getItemCount() > 0) boxTrangThai.setSelectedIndex(0);
     }
 
     public void addTimKiemListener(ActionListener l) {

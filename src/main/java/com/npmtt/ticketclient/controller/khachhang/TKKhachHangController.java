@@ -72,6 +72,7 @@ public class TKKhachHangController {
             } catch (Exception ex) {
                 ex.printStackTrace();
                 panel.showError(ex.getMessage());
+                refresh();
             }
         }
     }
